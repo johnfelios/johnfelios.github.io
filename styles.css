@@ -1,0 +1,52 @@
+/* Custom CSS for the contact bar */
+.contact-bar {
+    background-color: #268bbd; /* Bootstrap's bg-secondary */
+    color: #fff;               /* White text */
+    text-align: center;
+    height: 40px;              /* Increased height */
+    display: flex;             /* Flexbox for centering */
+    align-items: flex-start;       /* Vertically centers content */
+    justify-content: flex-start;   /* Horizontally centers content */
+    font-size: 14px;
+}
+
+
+/* Sticky header styles */
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow */
+    background-color: rgba(87, 214, 224, 255);
+}
+
+/* Navbar styles */
+.navbar {
+    padding: 0.75rem 1rem;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+.navbar-logo img {
+
+    max-height: 60px;
+}
+.nav-link {
+    color: #fff;
+    font-size: 1rem;
+}
+
+.nav-link.active {
+    color: #fff; /* Bootstrap primary color */
+}
+
+.nav-link:hover {
+    color: #0056b3; /* Slightly darker on hover */
+}
+
+/* Adjusting body padding to avoid overlap */
+body {
+    padding-top: 0px;
+}
