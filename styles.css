@@ -1,5 +1,9 @@
 /* Custom CSS for the contact bar */
 .contact-bar {
+    position: fixed; /* Makes the contact bar fixed at the top */
+    top: 0; /* Sticks it at the top */
+    left: 0; /* Aligns it to the left */
+    right: 0; /* Aligns it to the right */
     background-color: #268bbd;
     color: #fff;
     text-align: center;
@@ -8,6 +12,7 @@
     align-items: center; /* Center vertically */
     justify-content: start; /* Center horizontally */
     font-size: 14px;
+    z-index: 1030; 
 }
 
 .contact-bar p {
@@ -37,7 +42,7 @@
 /* Sticky header styles */
 .sticky-header {
     position: sticky;
-    top: 0;
+    top: 30px; 
     z-index: 1020;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow */
     background-color: rgba(87, 214, 224, 255);
