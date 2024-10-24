@@ -13,6 +13,7 @@
     justify-content: start; /* Center horizontally */
     font-size: 14px;
     z-index: 1030; 
+    -webkit-touch-callout: none; /* Disable callout for links */
 }
 
 .contact-bar p {
@@ -29,6 +30,7 @@
 .contact-bar a {
     color: #fff; /* Change this to your desired link color (e.g., gold) */
     text-decoration: none; /* Remove underline from links */
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight color in Safari */
 }
 
 .contact-bar a:hover {
