@@ -1,15 +1,38 @@
 /* Custom CSS for the contact bar */
 .contact-bar {
-    background-color: #268bbd; /* Bootstrap's bg-secondary */
-    color: #fff;               /* White text */
+    background-color: #268bbd;
+    color: #fff;
     text-align: center;
-    height: 40px;              /* Increased height */
-    display: flex;             /* Flexbox for centering */
-    align-items: flex-start;       /* Vertically centers content */
-    justify-content: flex-start;   /* Horizontally centers content */
+    height: 40px;
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: start; /* Center horizontally */
     font-size: 14px;
 }
 
+.contact-bar p {
+    margin: 0; /* Remove default margins to help with centering */
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Add space between icons and text */
+    padding-left: 15px;
+}
+
+.contact-bar i {
+    margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+    .contact-bar {
+        font-size: 12px; /* Decrease font size for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-bar {
+        font-size: 10px; /* Further decrease font size for extra small screens */
+    }
+}
 
 /* Sticky header styles */
 .sticky-header {
@@ -30,20 +53,24 @@
     font-size: 1.5rem;
 }
 .navbar-logo img {
-
     max-height: 60px;
+    mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 95%, rgba(0, 0, 0, 0) 100%);  
 }
+
+
+
 .nav-link {
     color: #fff;
     font-size: 1rem;
+    font-weight: bold;
 }
 
 .nav-link.active {
-    color: #fff; /* Bootstrap primary color */
+    color: #f5f36d !important;/* Bootstrap primary color */
 }
 
 .nav-link:hover {
-    color: #0056b3; /* Slightly darker on hover */
+    color: #f5f36d; /* Slightly darker on hover */
 }
 
 /* Adjusting body padding to avoid overlap */
