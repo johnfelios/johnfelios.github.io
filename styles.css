@@ -63,6 +63,7 @@
 /* Navbar styles */
 .navbar {
     padding: 0.75rem 1rem;
+
 }
 
 .navbar-brand {
@@ -70,7 +71,7 @@
     font-size: 1.5rem;
 }
 .navbar-logo img {
-    max-height: 60px;
+    max-height: 95px;
     mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 95%, rgba(0, 0, 0, 0) 100%);  
 }
 
@@ -99,8 +100,10 @@ body {
     display: grid; /* Use grid layout */
     grid-template-columns: repeat(2, 1fr); /* 2 columns on larger screens */
     gap: 20px; /* Space between items */
-    padding: 20px; /* Padding around the grid */
-    margin-top: 25px;
+    padding: 0px; /* Padding around the grid */
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 5px;
 }
 
 /*.grid-item {
@@ -110,6 +113,17 @@ body {
     border-radius: 5px; 
 }
 */
+.grid-container {
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on larger screens */
+    gap: 20px; /* Space between items */
+    padding: 20px; /* Padding around the grid */
+    margin-top: 25px;
+    max-width: 1200px; /* Restrict the container width */
+    margin-left: auto; /* Center the container */
+    margin-right: auto; /* Center the container */
+    
+}
 .grid-item {
     background-color: #ffffff; /* White background for a clean look */
     padding: 20px; /* Padding inside each container */
@@ -167,7 +181,7 @@ body {
 
 /* Responsive styles */
 @media (max-width: 768px) {
-    .container {
+    .grid-container {
         grid-template-columns: 1fr; /* 1 column on small screens */
     }
 }
