@@ -37,6 +37,8 @@
     color: #ffeb3b; /* Optional: Change color on hover for better user experience */
 }
 
+
+
 @media (max-width: 768px) {
     .contact-bar {
         font-size: 12px; /* Decrease font size for smaller screens */
@@ -98,22 +100,98 @@ body {
     grid-template-columns: repeat(2, 1fr); /* 2 columns on larger screens */
     gap: 20px; /* Space between items */
     padding: 20px; /* Padding around the grid */
+    margin-top: 25px;
 }
 
+/*.grid-item {
+    background-color: #1ecbe213; 
+    padding: 20px; /
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+}
+*/
 .grid-item {
-    background-color: #1ecbe213; /* Background color for containers */
+    background-color: #ffffff; /* White background for a clean look */
     padding: 20px; /* Padding inside each container */
-    border: 1px solid #ddd; /* Border for containers */
-    border-radius: 5px; /* Rounded corners */
+    border: 1px solid #e0e0e0; /* Light gray border for subtlety */
+    border-radius: 8px; /* Slightly rounded corners */
+    transition: box-shadow 0.2s, transform 0.2s; /* Smooth transition for hover effects */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    display: flex; /* Flexbox for layout */
+    flex-direction: column; /* Arrange content vertically */
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden; 
 }
 
 .grid-item:hover {
-    transform: scale(1.02); /* Slightly enlarge container on hover */
+    transform: translateY(-3px); /* Slight lift effect on hover */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow on hover */
+}
+
+.grid-item h2 {
+    font-size: 1.4rem; /* Smaller font size for the title */
+    color: #63c6df; /* A blue color for the title */
+    margin-bottom: 8px; /* Space below heading */
+    margin-top: 5px;
+    font-weight: 600; /* Slightly bolder font weight */
+    text-align: center;
+}
+
+.grid-item p {
+    font-size: 0.9rem; /* Slightly smaller text size */
+    color: #666; /* Medium gray for text */
+    line-height: 1.4; /* Improved line spacing */
+    text-align: left;
+    width: 100%;
+}
+.grid-item ul {
+    font-size: 0.9rem; /* Slightly smaller text size */
+    color: #666; /* Medium gray for text */
+    line-height: 1.4; /* Improved line spacing */
+}
+
+.grid-item img {
+    width: 100%;
+    height: 250px; /* Make images responsive to the container's width */
+    border-radius: 5px; /* Round image corners slightly */
+}
+.grid-item .divider {
+    width: 100%; /* Full width for the line */
+    border: none; /* Remove default border */
+    border-top: 2px solid #63c6df; /* Blue line */
+    margin-top: 0px;
 }
 
 /* Responsive styles */
 @media (max-width: 768px) {
     .container {
         grid-template-columns: 1fr; /* 1 column on small screens */
+    }
+}
+
+.contact-details {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-details a {
+    text-decoration: none; /* Remove underline from links */
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight color in Safari */
+}
+
+.contact-details h4 {
+    margin-bottom: 15px;
+}
+
+.contact-details p {
+    margin: 5px 0;
+}
+
+@media (max-width: 576px) {
+    .contact-details {
+        padding: 15px;
     }
 }
