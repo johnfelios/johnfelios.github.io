@@ -77,3 +77,28 @@
 body {
     padding-top: 0px;
 }
+
+.container {
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on larger screens */
+    gap: 20px; /* Space between items */
+    padding: 20px; /* Padding around the grid */
+}
+
+.grid-item {
+    background-color: #1ecbe213; /* Background color for containers */
+    padding: 20px; /* Padding inside each container */
+    border: 1px solid #ddd; /* Border for containers */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.grid-item:hover {
+    transform: scale(1.02); /* Slightly enlarge container on hover */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr; /* 1 column on small screens */
+    }
+}
