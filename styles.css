@@ -26,6 +26,14 @@
 .contact-bar i {
     margin-right: 5px;
 }
+.contact-bar a {
+    color: #fff; /* Change this to your desired link color (e.g., gold) */
+    text-decoration: none; /* Remove underline from links */
+}
+
+.contact-bar a:hover {
+    color: #ffeb3b; /* Optional: Change color on hover for better user experience */
+}
 
 @media (max-width: 768px) {
     .contact-bar {
