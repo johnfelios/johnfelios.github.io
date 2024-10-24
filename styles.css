@@ -43,12 +43,20 @@
     .contact-bar {
         font-size: 12px; /* Decrease font size for smaller screens */
     }
+  
+
+    
+    
 }
 
 @media (max-width: 480px) {
     .contact-bar {
         font-size: 10px; /* Further decrease font size for extra small screens */
     }
+    .navbar-logo img {
+        max-height: 65px !important;  
+    }
+    
 }
 
 /* Sticky header styles */
