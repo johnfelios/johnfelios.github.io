@@ -225,7 +225,7 @@ body {
 
 body {
    
-    background-image: url('backround.png') !important; /* Correct syntax for image URL */
+    background-image: url('/pictures/backround.png') !important; /* Correct syntax for image URL */
     background-size: cover;
     background-blend-mode: multiply; /* Blends color and image */
 
@@ -492,7 +492,7 @@ body {
     width: 100%;
     height: 520px;
     background-color: #d9d9d9;
-    background-image: url("Attica-Greece.jpg");
+    background-image: url("/pictures/Attica-Greece.jpg");
     background-size: cover;
     background-position-x: 50%;
     background-position-y: 50%;
