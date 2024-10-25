@@ -1559,7 +1559,7 @@ body {
   border-radius: 5px;
   color: #ffffff;
   margin-top: 15px;
-  text-decoration: none; /* Removes underline */
+    text-decoration: none; /* Removes underline */
 }
 
 .slider_section .detail-box a:hover {
