@@ -7,11 +7,11 @@
     background-color: #268bbd;
     color: #fff;
     text-align: center;
-    height: 40px;
+    height: 45px;
     display: flex;
     align-items: center; /* Center vertically */
     justify-content: start; /* Center horizontally */
-    font-size: 14px;
+    font-size: 16px;
     z-index: 1030; 
     -webkit-touch-callout: none; /* Disable callout for links */
 }
@@ -62,7 +62,7 @@
 /* Sticky header styles */
 .sticky-header {
     position: sticky;
-    top: 30px; 
+    top: 40px; 
     z-index: 1020;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow */
     background-color: rgba(87, 214, 224, 255);
@@ -112,6 +112,7 @@ body {
     margin-top: 0px;
     margin-left: 0px;
     margin-right: 5px;
+    height: 290px;
 }
 
 /*.grid-item {
@@ -487,15 +488,16 @@ body {
   }
   
   .contact_us_6 .map-box {
-    max-width: 800px;
-    max-height: 520px;
+    max-width: 700px;
+    max-height: 550px;
     width: 100%;
-    height: 520px;
-    background-color: #d9d9d9;
-    background-image: url("/pictures/Attica-Greece.jpg");
+    height: 500px;
+    background-color: transparent;
+    background-image: url("/pictures/Attica-Greece.png");
     background-size: cover;
     background-position-x: 50%;
     background-position-y: 50%;
+
   }
   
   .contact_us_6 .map-part {
@@ -1396,28 +1398,41 @@ body {
   }
   
   /* CARDS */
-  
   .cards {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  }
-  
-  .card {
+}
+
+/* Default layout for smaller screens */
+.card {
     margin: 20px;
     padding: 20px;
-    width: 500px;
+    width: calc(50% - 40px); /* Two cards per row on smaller screens */
     min-height: 200px;
     display: grid;
     grid-template-rows: 20px 50px 1fr 50px;
     border-radius: 10px;
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
     transition: all 0.2s;
+}
+
+/* Large screens: three cards per row */
+@media (min-width: 1024px) {
+    .card {
+        width: calc(33.33% - 40px); /* Three cards per row on large screens */
+    }
+}
+
+/* Small screens: one card per row */
+@media (max-width: 768px) {
+  .card {
+      width: calc(100% - 40px); /* One card per row */
   }
-  
-  
+}
+
   
   .card__link,
   .card__exit,
@@ -1541,6 +1556,7 @@ body {
   font-weight: 700;
   margin-bottom: 25px;
   color: #0355cc;
+  font-size:30px;
   font-family: 'Tahoma', sans-serif !important;
 }
 
@@ -1578,10 +1594,173 @@ font-size: 2.5rem;
 color: #444;
 font-size: 15px;
 }
-/* Add this CSS to create left space on larger screens only */
+
 @media (min-width: 768px) { /* Targets screens wider than 768px */
   .slider_section {
-    padding-top: 250px;
-    padding-left: 300px; /* Adjust the value to control the left spacing */
+    padding-top: 25px;
+    padding-left: 28px; /* Adjust the value to control the left spacing */
+  }
+}
+
+/* Offer Card Container */
+
+/* Offer Card Styling */
+.offer-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, #ff9800, #ff5722);
+  border-radius: 10px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.25);
+  padding: 20px;
+  margin: 20px 0;
+  color: #fff;
+  text-align: center;
+}
+
+.offer-card:hover {
+  transform: scale(1.05);
+}
+
+/* Offer Title */
+.offer-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Offer Price Text */
+.offer-price {
+  font-size: 18px;
+  font-weight: 300;
+  margin-top: 10px;
+}
+
+/* Price Highlight */
+.price-highlight {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .offer-card {
+      margin-top: 0;
+  }
+}
+
+/* Display the offer card on top in small screens */
+@media (max-width: 767px) {
+  .offer-card {
+      order: -1; /* Ensures the offer card appears first on small screens */
+      width: 100%;
+      margin-top: 10px;
+  }
+}
+
+/* Container for the two sections */
+.about-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* Each section inside the container */
+.about-container .section {
+  flex: 1 1 50%;  /* Flex-grow: 1, Flex-shrink: 1, Flex-basis: 50% */
+  padding: 10px;  /* Add some padding for spacing */
+  box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .about-container .section {
+    flex: 1 1 100%; /* Stacks each section vertically */
+  }
+}
+
+
+
+/* Set a light blue background for the entire section */
+.service-section {
+
+  padding: 20px 20px;
+}
+
+/* Style the card container to align items in rows */
+.service-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Service card styling */
+.service-card {
+  background-color: #66dce9e8;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+
+  text-align: left;
+  border-left: 5px solid #00bcd4;
+}
+
+/* Icon styling */
+.service-card__icon .icon {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+/* Title styling */
+.service-card__title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+/* Description styling */
+.service-card__description {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #ffffff;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+/* Detail list styling */
+.service-card__details {
+  list-style-type: none;
+  color: hsl(210, 100%, 100%);
+  font-size: 1rem;
+  padding-left: 0;
+}
+
+.service-card__details li {
+  margin-bottom: 10px;
+}
+
+.service-card__details li strong {
+  color: #00796b;
+}
+
+/* Default style: container is hidden on small screens */
+.full-width-container {
+  display: none;
+}
+
+/* Large screen style: show the container and make it 100% screen width */
+@media (min-width: 1024px) { /* Adjust 1024px as needed for large screens */
+  .full-width-container {
+      display: block;
+      width: 100vw; /* Full viewport width */
+      height: 300px; /* Adjust height as needed */
+      padding: 20px; /* Optional padding for internal spacing */
   }
 }
