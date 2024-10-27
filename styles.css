@@ -1517,7 +1517,7 @@ body {
   }
   
 
-@media (max-width: 767px) {
+@media (max-width: 800px) {
   .slider_section .detail-box {
       padding-bottom: 45px;
   }
@@ -1595,7 +1595,7 @@ color: #444;
 font-size: 15px;
 }
 
-@media (min-width: 768px) { /* Targets screens wider than 768px */
+@media (min-width: 800px) { /* Targets screens wider than 768px */
   .slider_section {
     padding-top: 25px;
     padding-left: 28px; /* Adjust the value to control the left spacing */
@@ -1670,15 +1670,54 @@ font-size: 15px;
 
 /* Each section inside the container */
 .about-container .section {
-  flex: 1 1 50%;  /* Flex-grow: 1, Flex-shrink: 1, Flex-basis: 50% */
-  padding: 10px;  /* Add some padding for spacing */
+  background-color: #a3cdd6c9; /* White background for sections */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 20px; /* Increased padding inside sections */
+  margin-bottom: 20px; /* Space between sections */
+  margin: 10px; /* Space between sections */
+  flex: 1 1 calc(50% - 20px); /* Adjust flex-basis to account for margin */
   box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+/* Header styles */
+.about-container h2 {
+  color: #333; /* Darker text for headers */
+  font-size: 24px; /* Size of headings */
+  margin-bottom: 10px; /* Space below headings */
+  border-bottom: 2px solid #007bff; /* Blue underline for emphasis */
+  padding-bottom: 5px; /* Padding below the header */
+}
+
+/* Paragraph styles */
+.about-container p {
+  color: #555; /* Medium grey text for paragraphs */
+  line-height: 1.6; /* Improved readability */
+  margin-bottom: 15px; /* Space between paragraphs */
+}
+
+/* List styles */
+.about-container ul {
+  list-style-type: none; /* Remove default bullet points */
+  padding: 0; /* Remove default padding */
+}
+
+.about-container li {
+  background-color: #e7f3fe; /* Light blue background for list items */
+  border-left: 5px solid #007bff; /* Blue left border for list items */
+  padding: 10px; /* Padding for list items */
+  margin-bottom: 10px; /* Space between list items */
+}
+
+/* Strong text styles */
+.about-container strong {
+  color: #007bff; /* Blue color for emphasized text */
 }
 
 /* Responsive design for smaller screens */
 @media (max-width: 768px) {
   .about-container .section {
-    flex: 1 1 100%; /* Stacks each section vertically */
+      flex: 1 1 100%; /* Stacks each section vertically */
   }
 }
 
@@ -1700,7 +1739,7 @@ font-size: 15px;
 
 /* Service card styling */
 .service-card {
-  background-color: #66dce9e8;
+  background-color: #3f88e2e8;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -1722,10 +1761,11 @@ font-size: 15px;
 /* Detail items styling */
 .service-card__details li {
   margin-bottom: 10px;
+  padding-right: 10px;
 }
 
 .service-card__details li strong {
-  color: #00796b;
+  color: #ffffff;
 }
 
 /* Larger screen styling */
@@ -1771,5 +1811,54 @@ font-size: 15px;
       width: 100vw; /* Full viewport width */
       height: 300px; /* Adjust height as needed */
       padding: 20px; /* Optional padding for internal spacing */
+  }
+}
+
+/* Main container styling */
+.two-part-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+
+}
+
+/* Top section styling */
+.top-section {
+width: 100%;
+}
+
+/* Bottom section styling */
+.bottom-section {
+ width: 100%;
+}
+
+@media (max-width: 1000px) {
+  .top-section {
+    margin-top: 40px;
+  }
+
+  .bottom-section {
+    margin-top: 250px;
+  }
+
+  .offer-card {
+    margin-left: 0px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .detail-box,
+  .offer-card {
+    margin-bottom: 20px; /* Add spacing if needed */
+  }
+}
+
+@media (min-width: 730px) {
+  .slider_section .offer-card {
+    margin-left: 100%; /* Adjusts the position slightly to the right */
+    transform: translateX(80%); /* Adds extra shift to the right without affecting the layout */
+    max-width: 80%; /* Ensure it doesn’t overflow the container */
+    min-width: 100%;
   }
 }

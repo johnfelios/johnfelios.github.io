@@ -32,10 +32,12 @@
                 
 
         
-                      <!-- Centered Logo (on the left) -->
-                      <div class="navbar-logo me-3 "> <!-- Added margin to the right -->
-                        <img src="/pictures/hclogo.png" alt="Logo" class="img-fluid">
-                    </div>
+                <div class="navbar-logo me-3"> <!-- Added margin to the right -->
+                  <a href="index.html">
+                      <img src="pictures/hclogo.png" alt="Logo" class="img-fluid">
+                  </a>
+              </div>
+              
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -68,59 +70,60 @@ https://dribbble.com/shots/14101951-Banners
 
 -->
 <div class="main-container">
-  <section class="slider_section ">
-      <div class="container ">
-        <div class="row">
-          <div class="col-md-6 ">
+<div class="two-part-container">
+  <div class="top-section">
+    <section class="slider_section">
+      <div class="container">
+        <div class="row align-items-center flex-md-row flex-column"> <!-- Flex adjustments added here -->
+          <div class="col-md-6 order-md-1">
             <div class="detail-box">
-              <h1>
-                Επαγγελματικές
-                <br>
-                Υπηρεσίες
-                <br>
-                Καθαρισμού 
-              </h1>
-              <p>
-                Προφέρουμε υπηρεσίες Καθαρισμού και Συντήρησης για σπίτια, μαγαζιά και Airbnb.
-              </p>
-              </p>
-              <a href="">
-               Επικοινωνηστε
-              </a>
+              <h1>Επαγγελματικές<br>Υπηρεσίες<br>Καθαρισμού</h1>
+              <p>Προφέρουμε υπηρεσίες Καθαρισμού και Συντήρησης για σπίτια, μαγαζιά και Airbnb.</p>
+              <a href="contact.html">Επικοινωνηστε</a>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 order-md-2">
             <div class="offer-card">
               <div class="offer-content">
                 <p class="offer-price">Τώρα μόνο με <span class="price-highlight">1,8 €</span> ανά τετραγωνικό μέτρο</p>
               </div>
             </div>
           </div>
+        </div>
       </div>
     </section>
-
-    <!-- end slider section -->
-    <div class="cards">
-      <div class="card card-1">
-        <div class="card__icon">
-            <img src="icons/broom.png" alt="Cleaning Icon" class="icon mb-2" style="width: 50px; height: 50px;"></div>
-        <h2 class="card__title">Καθαρισμός Σπιτιών</h2>
-      </div>
-      <div class="card card-1">
-        <div class="card__icon">
-            <img src="icons/vacuum.png" alt="vacuum Icon" class="icon mb-2" style="width: 50px; height: 50px;"></div>
-        <h2 class="card__title">Καθαρισμός Επαγγελματικών Χώρων</h2>
-      </div>
-      <div class="card card-1">
-        <div class="card__icon">
-            <img src="icons/ecocleaning.png" alt="ecocleaning Icon" class="icon mb-2" style="width: 50px; height: 50px;"></div>
-        <h2 class="card__title">Καθαρισμός Καταλυμάτων Airbnb</h2>
-      </div>
-   
+  </div>
   
 
-  </div> 
-     
+    <!-- end slider section -->
+  <div class="bottom-section">
+    <div class="cards">
+
+      <div class="card card-1">
+        <div class="card__icon">
+            <img src="icons/broom.png" alt="Cleaning Icon" class="icon mb-2" style="width: 50px; height: 50px;">
+        </div>
+        <h2 class="card__title">Καθαρισμός Σπιτιών</h2>
+      </div>
+
+      <div class="card card-1">
+        <div class="card__icon">
+            <img src="icons/vacuum.png" alt="vacuum Icon" class="icon mb-2" style="width: 50px; height: 50px;">
+        </div>
+        <h2 class="card__title">Καθαρισμός Επαγγελματικών Χώρων</h2>
+      </div>
+
+      <div class="card card-1">
+        <div class="card__icon">
+            <img src="icons/ecocleaning.png" alt="ecocleaning Icon" class="icon mb-2" style="width: 50px; height: 50px;">
+        </div>
+        <h2 class="card__title">Καθαρισμός Καταλυμάτων Airbnb</h2>
+      </div>
+
+    </div>
+   </div> 
+   
+   </div>
   </main>
 
     <!-- Bootstrap 5 JS (for responsive navbar) -->
