@@ -1670,7 +1670,7 @@ font-size: 15px;
 
 /* Each section inside the container */
 .about-container .section {
-  background-color: #a3cdd6c9; /* White background for sections */
+  background-color: #cddde1d9; /* White background for sections */
   border-radius: 8px; /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   padding: 20px; /* Increased padding inside sections */
@@ -1680,20 +1680,22 @@ font-size: 15px;
   box-sizing: border-box; /* Ensures padding is included in the width */
 }
 
-/* Header styles */
-.about-container h2 {
-  color: #333; /* Darker text for headers */
-  font-size: 24px; /* Size of headings */
-  margin-bottom: 10px; /* Space below headings */
-  border-bottom: 2px solid #007bff; /* Blue underline for emphasis */
-  padding-bottom: 5px; /* Padding below the header */
+.about-container .section-transparent {
+
+  padding: 20px; /* Increased padding inside sections */
+  margin-bottom: 20px; /* Space between sections */
+  margin: 10px; /* Space between sections */
+  flex: 1 1 calc(50% - 20px); /* Adjust flex-basis to account for margin */
+  box-sizing: border-box; /* Ensures padding is included in the width */
 }
+
 
 /* Paragraph styles */
 .about-container p {
-  color: #555; /* Medium grey text for paragraphs */
   line-height: 1.6; /* Improved readability */
   margin-bottom: 15px; /* Space between paragraphs */
+  color: rgb(141, 142, 146);
+  font-size: 0.9rem; /* Reduced font size */
 }
 
 /* List styles */
@@ -1711,8 +1713,8 @@ font-size: 15px;
 
 /* Strong text styles */
 .about-container strong {
-  color: #007bff; /* Blue color for emphasized text */
-}
+  color: rgb(116, 117, 122);
+}  
 
 /* Responsive design for smaller screens */
 @media (max-width: 768px) {
@@ -1729,6 +1731,13 @@ font-size: 15px;
   padding: 20px 20px;
 }
 
+@media (max-width: 768px) {
+  .service-section {
+      padding: 20px 0; /* Remove left and right padding on small screens */
+      margin: 0;       /* Ensure there's no margin on small screens */
+  }
+}
+
 /* Style the card container to align items in rows */
 .service-cards {
   display: flex;
@@ -1739,7 +1748,7 @@ font-size: 15px;
 
 /* Service card styling */
 .service-card {
-  background-color: #3f88e2e8;
+  background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -1753,7 +1762,7 @@ font-size: 15px;
   display: flex;
   flex-direction: column;
   list-style-type: none;
-  color: hsl(210, 100%, 100%);
+  color: rgb(141, 142, 146);
   font-size: 0.9rem; /* Reduced font size */
   padding-left: 0;
 }
@@ -1765,7 +1774,7 @@ font-size: 15px;
 }
 
 .service-card__details li strong {
-  color: #ffffff;
+  color: rgb(116, 117, 122);
 }
 
 /* Larger screen styling */
@@ -1786,7 +1795,7 @@ font-size: 15px;
 .service-card__title {
   font-size: 1.8rem;
   font-weight: 600;
-  color: #ffffff;
+  color: #3299e2;
   margin-bottom: 12px;
 }
 
@@ -1794,7 +1803,7 @@ font-size: 15px;
 .service-card__description {
   font-size: 1.1rem;
   font-style: italic;
-  color: #ffffff;
+  color: #3f3d3d;
   margin-bottom: 15px;
   line-height: 1.6;
 }
@@ -1861,4 +1870,20 @@ width: 100%;
     max-width: 80%; /* Ensure it doesn’t overflow the container */
     min-width: 100%;
   }
+}
+/* Counter animation */
+@keyframes countUp {
+  from {
+      content: "0";
+  }
+  to {
+      content: "123"; /* End number, manually set */
+  }
+}
+
+/* Apply animation to counter */
+.counter::before {
+  content: "0"; /* Start from 0 */
+  animation: countUp 2s steps(123, end) forwards; /* "steps" simulates counting */
+  display: inline-block;
 }
