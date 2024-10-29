@@ -1,58 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Card with Arrow Link</title>
-<style>
-  /* Basic reset */
-  * {
-    box-sizing: border-box;
-  }
-
-  /* Card container styling */
-  .card {
-    position: relative;
-    width: 300px;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background-color: #ffffff;
-    overflow: hidden;
-  }
-
-  /* Content styling */
-  .card-content {
-    font-size: 1rem;
-    color: #333;
-  }
-
-  /* Arrow link styling */
-  .arrow-link {
-    position: absolute;
-    bottom: 16px;
-    right: 16px;
-    font-size: 1.5rem;
-    color: #007BFF;
-    text-decoration: none;
-    transition: transform 0.3s ease;
-  }
-
-  .arrow-link:hover {
-    transform: translateX(5px); /* Subtle movement on hover */
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Years of Experience Counter</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            font-size: 2em;
+            color: #333;
+        }
+        .counter {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
+    <div class="counter">
+        <div>Years of Experience:</div>
+        <div id="years">0</div>
+    </div>
 
-<div class="card">
-  <div class="card-content">
-    <h3>Card Title</h3>
-    <p>This is some text inside the card. You can add more content here as needed.</p>
-  </div>
-  <!-- Arrow link in bottom right corner -->
-  <a href="https://example.com" class="arrow-link" target="_blank">→</a>
-</div>
+    <script>
+        let years = 0;
+        const target = 20;
+        const increment = 0.1; // Change this value for faster or slower count
+        const counterElement = document.getElementById('years');
 
+        const interval = setInterval(() => {
+            years += increment;
+            if (years >= target) {
+                years = target; // Ensure it doesn't go over the target
+                clearInterval(interval);
+            }
+            counterElement.textContent = Math.floor(years); // Display the integer value
+        }, 5); // Update every 100ms
+    </script>
 </body>
 </html>

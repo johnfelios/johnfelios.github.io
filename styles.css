@@ -1955,3 +1955,19 @@ width: 100%;
 .arrow-link:hover {
   transform: translateX(5px); 
 }
+
+.year-counter {
+  display: flex;
+  align-items: center;
+  width: 400px;
+  justify-content: center; /* Centers the content */ 
+  color: #03a9f4; /* Text color */
+  font-weight: bold; /* Makes the text bold */
+  font-size: 1.5em; /* Base font size for the text */
+  padding: 10px 20px; /* Adds some padding around the content */
+ 
+  
+  transition: transform 0.2s; /* Smooth transition for hover effect */
+}
+
+
