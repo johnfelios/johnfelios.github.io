@@ -1917,14 +1917,13 @@ width: 100%;
     width: auto;
     margin: 10px; 
     display: flex;
-    justify-content: center; /* Centers items horizontally */
-    align-items: center;     /* Centers items vertically */
+    justify-content: center; 
+    align-items: center;     
 }
 
 
 .p-calligraphic {
-  font-family: 'EB Garamond', 'Cormorant SC', serif; /* Common calligraphic fonts with Greek support */
-  font-style: italic;
+  font-family: 'EB Garamond', 'Cormorant SC', serif; 
   color: #3299e2;
   font-size: 24px;
   font-weight: 600;
@@ -1936,10 +1935,13 @@ width: 100%;
   right: 16px;
   font-size: 2.5rem;
   color: #f3f3f3;
-  text-decoration: none;
+  text-decoration: none !important;
   transition: transform 0.3s ease;
+  cursor: pointer; /* Ensures it's clickable */
+  -webkit-tap-highlight-color: transparent; /* Disable tap highlight color on iOS */
+  -webkit-touch-callout: none; /* Disable callout on long-press */
 }
 
 .arrow-link:hover {
-  transform: translateX(5px); /* Subtle movement on hover */
+  transform: translateX(5px); 
 }
