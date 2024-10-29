@@ -1884,9 +1884,18 @@ width: 100%;
   }
 }
 
-@media (min-width: 730px) {
+@media (min-width: 769px) {
   .slider_section .offer-card {
     margin-left: 100%; /* Adjusts the position slightly to the right */
+    transform: translateX(80%); /* Adds extra shift to the right without affecting the layout */
+    max-width: 80%; /* Ensure it doesn’t overflow the container */
+    min-width: 100%;
+  }
+}
+
+@media (min-width: 1900px) {
+  .slider_section .offer-card {
+    margin-left: 250%; /* Adjusts the position slightly to the right */
     transform: translateX(80%); /* Adds extra shift to the right without affecting the layout */
     max-width: 80%; /* Ensure it doesn’t overflow the container */
     min-width: 100%;
@@ -1923,7 +1932,6 @@ width: 100%;
 
 
 .p-calligraphic {
-  font-family: 'EB Garamond', 'Cormorant SC', serif; 
   color: #3299e2;
   font-size: 24px;
   font-weight: 600;
