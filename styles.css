@@ -461,7 +461,27 @@ body {
     margin-bottom: 5px;
     margin-left: 0px;
     color: #9c9c9c;
+
+    
   }
+
+  .contact_us_6 .text-blk.input-title a {
+    color: #9c9c9c; 
+    font-size: 16px;
+    text-decoration: none; 
+    -webkit-tap-highlight-color: transparent; 
+    margin-left: 10px;
+}
+
+.contact_us_6 .text-blk.input-title a:hover {
+    color: #19a3f3; 
+}
+
+.contact_us_6 .text-blk.input-title i {
+  font-size: 30px;
+  color: #19a3f3; 
+}
+
   
   .contact_us_6 ::placeholder {
     color: #dadada;
@@ -497,6 +517,7 @@ body {
     background-size: cover;
     background-position-x: 50%;
     background-position-y: 50%;
+    border-radius: 10px;
 
   }
   
@@ -1886,4 +1907,25 @@ width: 100%;
   content: "0"; /* Start from 0 */
   animation: countUp 2s steps(123, end) forwards; /* "steps" simulates counting */
   display: inline-block;
+}
+
+.title-container{
+    background-color: #ffffffd9; /* White background for sections */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 10px; 
+    width: auto;
+    margin: 10px; 
+    display: flex;
+    justify-content: center; /* Centers items horizontally */
+    align-items: center;     /* Centers items vertically */
+}
+
+
+.p-calligraphic {
+  font-family: 'EB Garamond', 'Cormorant SC', serif; /* Common calligraphic fonts with Greek support */
+  font-style: italic;
+  color: #3299e2;
+  font-size: 24px;
+  font-weight: 600;
 }
