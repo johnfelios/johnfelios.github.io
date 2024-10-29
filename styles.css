@@ -1452,6 +1452,8 @@ body {
 @media (max-width: 768px) {
   .card {
       width: calc(100% - 40px); /* One card per row */
+      margin-top: 20px;
+      padding: 20px;
   }
 }
 
