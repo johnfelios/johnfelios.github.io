@@ -1,73 +1,58 @@
 <!DOCTYPE html>
-<html lang="el">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Greek Fonts Comparison</title>
-  <!-- Google Fonts Links -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&family=Noto+Sans:wght@400;700&family=Montserrat:wght@400;700&family=Merriweather+Sans:wght@400;700&family=Lato:wght@400;700&family=Merriweather:wght@400;700&family=Roboto+Slab:wght@400;700&family=Playfair+Display:wght@400;700&family=EB+Garamond:wght@400;700&family=Raleway:wght@400;700&family=Poppins:wght@400;700&family=Oswald:wght@400;700&family=PT+Sans:wght@400;700&family=Inconsolata:wght@400;700&family=Ubuntu:wght@400;700&family=Arvo:wght@400;700&family=Fira+Sans:wght@400;700&family=Source+Sans+Pro:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      padding: 20px;
-    }
-    h1 {
-      margin: 20px 0;
-      font-size: 2em;
-    }
-    /* Custom font styles */
-    .roboto { font-family: 'Roboto', sans-serif; }
-    .open-sans { font-family: 'Open Sans', sans-serif; }
-    .noto-sans { font-family: 'Noto Sans', sans-serif; }
-    .montserrat { font-family: 'Montserrat', sans-serif; }
-    .merriweather-sans { font-family: 'Merriweather Sans', sans-serif; }
-    .lato { font-family: 'Lato', sans-serif; }
-    .merriweather { font-family: 'Merriweather', serif; }
-    .roboto-slab { font-family: 'Roboto Slab', serif; }
-    .playfair { font-family: 'Playfair Display', serif; }
-    .eb-garamond { font-family: 'EB Garamond', serif; }
-    .raleway { font-family: 'Raleway', sans-serif; }
-    .poppins { font-family: 'Poppins', sans-serif; }
-    .oswald { font-family: 'Oswald', sans-serif; }
-    .pt-sans { font-family: 'PT Sans', sans-serif; }
-    .ubuntu { font-family: 'Ubuntu', sans-serif; }
-    .arvo { font-family: 'Arvo', serif; }
-    .fira-sans { font-family: 'Fira Sans', sans-serif; }
-    .source-sans-pro { font-family: 'Source Sans Pro', sans-serif; }
-    .quicksand { font-family: 'Quicksand', sans-serif; }
-    .inconsolata { font-family: 'Inconsolata', monospace; }
-    /* System Fonts */
-    .georgia { font-family: Georgia, serif; }
-    .times-new-roman { font-family: "Times New Roman", serif; }
-    .courier-new { font-family: "Courier New", monospace; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Card with Arrow Link</title>
+<style>
+  /* Basic reset */
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Card container styling */
+  .card {
+    position: relative;
+    width: 300px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    overflow: hidden;
+  }
+
+  /* Content styling */
+  .card-content {
+    font-size: 1rem;
+    color: #333;
+  }
+
+  /* Arrow link styling */
+  .arrow-link {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    font-size: 1.5rem;
+    color: #007BFF;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+  }
+
+  .arrow-link:hover {
+    transform: translateX(5px); /* Subtle movement on hover */
+  }
+</style>
 </head>
 <body>
 
-  <h1 class="roboto">ΡΟΒΟΤΟ</h1>
-  <h1 class="open-sans">ΟΠΕΝ ΣΑΝΣ</h1>
-  <h1 class="noto-sans">ΝΟΤΟ ΣΑΝΣ</h1>
-  <h1 class="montserrat">ΜΟΝΤΣΕΡΑΤ</h1>
-  <h1 class="merriweather-sans">ΜΕΡΙΟΥΕΔΕΡ ΣΑΝΣ</h1>
-  <h1 class="lato">ΛΑΤΟ</h1>
-  <h1 class="merriweather">ΜΕΡΙΟΥΕΔΕΡ</h1>
-  <h1 class="roboto-slab">ΡΟΒΟΤΟ ΣΛΑΒ</h1>
-  <h1 class="playfair">ΠΛΑΙΦΕΡ ΝΤΙΣΠΛΕΪ</h1>
-  <h1 class="eb-garamond">ΕΒ ΓΚΑΡΑΜΟΝΤ</h1>
-  <h1 class="raleway">ΡΑΛΕΓΟΥΕΪ</h1>
-  <h1 class="poppins">ΠΟΠΙΝΣ</h1>
-  <h1 class="oswald">ΟΣΒΑΛΝΤ</h1>
-  <h1 class="pt-sans">ΠΙΤΙ ΣΑΝΣ</h1>
-  <h1 class="ubuntu">ΟΥΜΠΟΥΝΤΟΥ</h1>
-  <h1 class="arvo">ΑΡΒΟ</h1>
-  <h1 class="fira-sans">ΦΙΡΑ ΣΑΝΣ</h1>
-  <h1 class="source-sans-pro">ΣΟΡΣ ΣΑΝΣ ΠΡΟ</h1>
-  <h1 class="quicksand">ΚΟΥΙΚΣΑΝΤ</h1>
-  <h1 class="inconsolata">ΙΝΚΟΝΣΟΛΑΤΑ</h1>
-  <h1 class="georgia">ΓΕΩΡΓΙΑ</h1>
-  <h1 class="times-new-roman">ΤΑΙΜΣ ΝΙΟΥ ΡΟΜΑΝ</h1>
-  <h1 class="courier-new">ΚΟΥΡΙΕΡ ΝΙΟΥ</h1>
+<div class="card">
+  <div class="card-content">
+    <h3>Card Title</h3>
+    <p>This is some text inside the card. You can add more content here as needed.</p>
+  </div>
+  <!-- Arrow link in bottom right corner -->
+  <a href="https://example.com" class="arrow-link" target="_blank">→</a>
+</div>
 
 </body>
 </html>

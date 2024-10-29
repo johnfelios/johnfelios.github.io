@@ -1929,3 +1929,17 @@ width: 100%;
   font-size: 24px;
   font-weight: 600;
 }
+
+.arrow-link {
+  position: absolute;
+  bottom: 5px;
+  right: 16px;
+  font-size: 2.5rem;
+  color: #f3f3f3;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.arrow-link:hover {
+  transform: translateX(5px); /* Subtle movement on hover */
+}
