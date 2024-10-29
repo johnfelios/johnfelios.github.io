@@ -1,45 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="el">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Years of Experience Counter</title>
+    <title>Greek Font Styles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&family=Open+Sans:wght@400&family=Source+Sans+Pro:wght@400&family=Lora:wght@400&family=PT+Sans:wght@400&display=swap" rel="stylesheet">
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
             font-family: Arial, sans-serif;
-            font-size: 2em;
-            color: #333;
+            line-height: 1.6;
         }
-        .counter {
-            text-align: center;
+        .font-sample {
+            margin-bottom: 20px;
         }
+        h2 {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+        .roboto { font-family: 'Roboto', sans-serif; }
+        .open-sans { font-family: 'Open Sans', sans-serif; }
+        .source-sans-pro { font-family: 'Source Sans Pro', sans-serif; }
+        .lora { font-family: 'Lora', serif; }
+        .pt-sans { font-family: 'PT Sans', sans-serif; }
     </style>
 </head>
 <body>
-    <div class="counter">
-        <div>Years of Experience:</div>
-        <div id="years">0</div>
+    <h1>Greek Font Styles</h1>
+    <p>This page displays various fonts that support Greek characters. Each section shows a different font style applied to a Greek text sample.</p>
+
+    <div class="font-sample roboto">
+        <h2>Roboto</h2>
+        <p>Αυτή είναι μια πρόταση στα Ελληνικά χρησιμοποιώντας τη γραμματοσειρά Roboto.</p>
     </div>
 
-    <script>
-        let years = 0;
-        const target = 20;
-        const increment = 0.1; // Change this value for faster or slower count
-        const counterElement = document.getElementById('years');
+    <div class="font-sample open-sans">
+        <h2>Open Sans</h2>
+        <p>Αυτή είναι μια πρόταση στα Ελληνικά χρησιμοποιώντας τη γραμματοσειρά Open Sans.</p>
+    </div>
 
-        const interval = setInterval(() => {
-            years += increment;
-            if (years >= target) {
-                years = target; // Ensure it doesn't go over the target
-                clearInterval(interval);
-            }
-            counterElement.textContent = Math.floor(years); // Display the integer value
-        }, 5); // Update every 100ms
-    </script>
+    <div class="font-sample source-sans-pro">
+        <h2>Source Sans Pro</h2>
+        <p>Αυτή είναι μια πρόταση στα Ελληνικά χρησιμοποιώντας τη γραμματοσειρά Source Sans Pro.</p>
+    </div>
+
+    <div class="font-sample lora">
+        <h2>Lora</h2>
+        <p>Αυτή είναι μια πρόταση στα Ελληνικά χρησιμοποιώντας τη γραμματοσειρά Lora.</p>
+    </div>
+
+    <div class="font-sample pt-sans">
+        <h2>PT Sans</h2>
+        <p>Αυτή είναι μια πρόταση στα Ελληνικά χρησιμοποιώντας τη γραμματοσειρά PT Sans.</p>
+    </div>
+
 </body>
 </html>

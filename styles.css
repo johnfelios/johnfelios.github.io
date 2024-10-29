@@ -1430,7 +1430,8 @@ body {
 /* Default layout for smaller screens */
 .card {
     margin: 20px;
-    padding: 20px;
+    margin-top: 0%;
+    padding-top: 0%;
     width: calc(50% - 40px); /* Two cards per row on smaller screens */
     min-height: 200px;
     display: grid;
@@ -1576,11 +1577,11 @@ body {
 }
 
 .slider_section .detail-box h1 {
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 25px;
   color: #0355cc;
   font-size:30px;
-  font-family: 'Tahoma', sans-serif !important;
+  font-family: 'Open Sans,Arial', sans-serif !important;
 }
 
 .slider_section .detail-box p {
@@ -1639,6 +1640,7 @@ font-size: 15px;
   margin: 20px 0;
   color: #fff;
   text-align: center;
+  width: 100%; /* Full width on smaller screens */
 }
 
 .offer-card:hover {
@@ -1654,14 +1656,14 @@ font-size: 15px;
 
 /* Offer Price Text */
 .offer-price {
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 300;
   margin-top: 10px;
 }
 
 /* Price Highlight */
 .price-highlight {
-  font-size: 28px;
+  font-size: 34px;
   font-weight: bold;
   color: #ffffff;
 }

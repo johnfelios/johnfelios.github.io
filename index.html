@@ -111,7 +111,7 @@ https://dribbble.com/shots/14101951-Banners
     
     <div class="cards">
 
-      <div class="card card-1">
+      <div class="card card-1" data-url="services">
         <div class="card__icon">
             <img src="icons/broom.png" alt="Cleaning Icon" class="icon mb-2" style="width: 50px; height: 50px;">
         </div>
@@ -119,7 +119,7 @@ https://dribbble.com/shots/14101951-Banners
         <a href="services#home-cleaning" class="arrow-link">&#8594;</a>
       </div>
 
-      <div class="card card-1">
+      <div class="card card-1"  data-url="services#store-cleaning">
         <div class="card__icon">
             <img src="icons/vacuum.png" alt="vacuum Icon" class="icon mb-2" style="width: 50px; height: 50px;">
         </div>
@@ -127,7 +127,7 @@ https://dribbble.com/shots/14101951-Banners
         <a href="services#store-cleaning" class="arrow-link">&#8594;</a>
       </div>
 
-      <div class="card card-1">
+      <div class="card card-1" data-url="services#airbnb-cleaning">
         <div class="card__icon">
             <img src="icons/ecocleaning.png" alt="ecocleaning Icon" class="icon mb-2" style="width: 50px; height: 50px;">
         </div>
@@ -140,6 +140,21 @@ https://dribbble.com/shots/14101951-Banners
    
    </div>
   </main>
+
+  <script>
+  document.querySelectorAll('.card').forEach(card => {
+    // Add a click event listener to each card
+    card.addEventListener('click', () => {
+      // Get the URL from the data-url attribute
+      const url = card.getAttribute('data-url');
+      // Redirect to the specified URL
+      if (url) {
+        window.location.href = url;
+      }
+    });
+  });
+  </script>
+  
 
     <!-- Bootstrap 5 JS (for responsive navbar) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
