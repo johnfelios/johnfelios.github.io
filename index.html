@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Reservation System</title>
+    <style>
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --secondary: #2ecc71;
+            --danger: #e74c3c;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0.75rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        h1 {
+            font-size: 1.6rem;
+        }
+        
+        h2 {
+            font-size: 1.3rem;
+        }
+        
+        h3 {
+            font-size: 1.1rem;
+        }
+        
+        .booking-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .booking-steps::after {
+            content: '';
+            position: absolute;
+            top: 1.5rem;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--light-gray);
+            z-index: 1;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-number {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-name {
+            font-size: 0.75rem;
+            text-align: center;
+        }
+        
+        .active .step-number {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .completed .step-number {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .booking-section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Date picker styles */
+        .date-picker {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .month-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            grid-column: 1 / -1;
+        }
+        
+        .weekday {
+            text-align: center;
+            font-weight: bold;
+            color: var(--gray);
+            font-size: 0.75rem;
+        }
+        
+        .day {
+            text-align: center;
+            padding: 0.5rem 0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-size: 0.9rem;
+        }
+        
+        .day:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .day.selected {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .day.disabled {
+            color: var(--light-gray);
+            cursor: not-allowed;
+        }
+        
+        /* Timeslot styles */
+        .timeslots {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+        
+        .timeslot {
+            border: 1px solid var(--light-gray);
+            border-radius: 6px;
+            padding: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .timeslot:hover {
+            border-color: var(--primary);
+        }
+        
+        .timeslot.selected {
+            border-color: var(--primary);
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+        
+        .timeslot-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .timeslot-time {
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .timeslot-price {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .timeslot-availability {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 0.5rem;
+        }
+        
+        .discount-banner {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--danger);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            transform: rotate(45deg) translate(25%, -50%);
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        
+        /* Form styles */
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.25);
+        }
+        
+        .card-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        /* Button styles */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+        
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+        }
+        
+        .booking-summary {
+            background-color: var(--light);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+        }
+        
+        /* Responsive styles */
+        @media (min-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            h3 {
+                font-size: 1.2rem;
+            }
+            
+            .step-number {
+                width: 3rem;
+                height: 3rem;
+            }
+            
+            .step-name {
+                font-size: 0.9rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .booking-section {
+                padding: 1.5rem;
+            }
+            
+            .weekday, .day {
+                font-size: 1rem;
+            }
+            
+            .timeslot-time {
+                font-size: 1rem;
+            }
+            
+            .discount-banner {
+                font-size: 0.8rem;
+            }
+        }
+        
+        @media (min-width: 600px) {
+            .form-row {
+                flex-direction: row;
+            }
+            
+            .form-row > div {
+                flex: 1;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .timeslots {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* Visible/hidden states */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Reserve Your Space</h1>
+            <p>Select a date and time to book your perfect spot</p>
+        </header>
+        
+        <div class="booking-steps">
+            <div class="step active">
+                <div class="step-number">1</div>
+                <div class="step-name">Choose Date & Time</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-name">Personal Details</div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-name">Confirmation</div>
+            </div>
+        </div>
+        
+        <!-- Step 1: Choose Date & Time -->
+        <div class="booking-section" id="step1">
+            <h2>Select a Date</h2>
+            <div class="date-picker">
+                <div class="month-nav">
+                    <button class="btn btn-outline" id="prev-month">&lt; Prev</button>
+                    <h3 id="current-month">April 2025</h3>
+                    <button class="btn btn-outline" id="next-month">Next &gt;</button>
+                </div>
+                <div class="weekday">Sun</div>
+                <div class="weekday">Mon</div>
+                <div class="weekday">Tue</div>
+                <div class="weekday">Wed</div>
+                <div class="weekday">Thu</div>
+                <div class="weekday">Fri</div>
+                <div class="weekday">Sat</div>
+                <div class="day disabled">30</div>
+                <div class="day disabled">31</div>
+                <div class="day selected" data-date="April 1, 2025">1</div>
+                <div class="day" data-date="April 2, 2025">2</div>
+                <div class="day" data-date="April 3, 2025">3</div>
+                <div class="day" data-date="April 4, 2025">4</div>
+                <div class="day" data-date="April 5, 2025">5</div>
+                <div class="day" data-date="April 6, 2025">6</div>
+                <div class="day" data-date="April 7, 2025">7</div>
+                <div class="day" data-date="April 8, 2025">8</div>
+                <div class="day" data-date="April 9, 2025">9</div>
+                <div class="day" data-date="April 10, 2025">10</div>
+                <div class="day" data-date="April 11, 2025">11</div>
+                <div class="day" data-date="April 12, 2025">12</div>
+                <div class="day" data-date="April 13, 2025">13</div>
+                <div class="day" data-date="April 14, 2025">14</div>
+                <div class="day" data-date="April 15, 2025">15</div>
+                <div class="day" data-date="April 16, 2025">16</div>
+                <div class="day" data-date="April 17, 2025">17</div>
+                <div class="day" data-date="April 18, 2025">18</div>
+                <div class="day" data-date="April 19, 2025">19</div>
+                <div class="day" data-date="April 20, 2025">20</div>
+                <div class="day" data-date="April 21, 2025">21</div>
+                <div class="day" data-date="April 22, 2025">22</div>
+                <div class="day" data-date="April 23, 2025">23</div>
+                <div class="day" data-date="April 24, 2025">24</div>
+                <div class="day" data-date="April 25, 2025">25</div>
+                <div class="day" data-date="April 26, 2025">26</div>
+                <div class="day" data-date="April 27, 2025">27</div>
+                <div class="day" data-date="April 28, 2025">28</div>
+                <div class="day" data-date="April 29, 2025">29</div>
+                <div class="day" data-date="April 30, 2025">30</div>
+                <div class="day disabled">1</div>
+                <div class="day disabled">2</div>
+                <div class="day disabled">3</div>
+            </div>
+            
+            <h2 id="timeslot-date-heading">Available Timeslots - April 1, 2025</h2>
+            <div class="timeslots">
+                <div class="timeslot">
+                    <div class="timeslot-info">
+                        <span class="timeslot-time">9:00 AM - 11:00 AM</span>
+                        <span class="timeslot-price">$45</span>
+                    </div>
+                    <div class="timeslot-availability">8 spots remaining</div>
+                </div>
+                
+                <div class="timeslot selected">
+                    <div class="timeslot-info">
+                        <span class="timeslot-time">11:30 AM - 1:30 PM</span>
+                        <span class="timeslot-price">$55</span>
+                    </div>
+                    <div class="timeslot-availability">4 spots remaining</div>
+                    <div class="discount-banner">15% OFF</div>
+                </div>
+                
+                <div class="timeslot">
+                    <div class="timeslot-info">
+                        <span class="timeslot-time">2:00 PM - 4:00 PM</span>
+                        <span class="timeslot-price">$65</span>
+                    </div>
+                    <div class="timeslot-availability">10 spots remaining</div>
+                </div>
+                
+                <div class="timeslot">
+                    <div class="timeslot-info">
+                        <span class="timeslot-time">4:30 PM - 6:30 PM</span>
+                        <span class="timeslot-price">$75</span>
+                    </div>
+                    <div class="timeslot-availability">2 spots remaining</div>
+                    <div class="discount-banner">10% OFF</div>
+                </div>
+                
+                <div class="timeslot">
+                    <div class="timeslot-info">
+                        <span class="timeslot-time">7:00 PM - 9:00 PM</span>
+                        <span class="timeslot-price">$85</span>
+                    </div>
+                    <div class="timeslot-availability">12 spots remaining</div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <div></div> <!-- Empty div to maintain space-between alignment -->
+                <button class="btn btn-primary" id="step1-next">Next</button>
+            </div>
+        </div>
+        
+        <!-- Step 2: Personal & Payment Details -->
+        <div class="booking-section hidden" id="step2">
+            <h2>Personal Information</h2>
+            <div class="form-group">
+                <label for="fullname">Full Name</label>
+                <input type="text" id="fullname" placeholder="John Doe" required>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="john@example.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="+1 (555) 123-4567" required>
+                </div>
+            </div>
+            
+            <h2>Payment Details</h2>
+            <div class="form-group">
+                <label for="card-number">Card Number</label>
+                <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="expiry-date">Expiry Date</label>
+                    <input type="text" id="expiry-date" placeholder="MM/YY" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" placeholder="123" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="name-on-card">Name on Card</label>
+                <input type="text" id="name-on-card" placeholder="John Doe" required>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-outline" id="step2-back">Back</button>
+                <button class="btn btn-primary" id="step2-next">Confirm Booking</button>
+            </div>
+        </div>
+        
+        <!-- Step 3: Confirmation -->
+        <div class="booking-section hidden" id="step3">
+            <h2>Booking Confirmed!</h2>
+            <p>Thank you for your reservation. A confirmation email has been sent to your email address.</p>
+            
+            <div class="booking-summary">
+                <h3>Booking Details</h3>
+                <p><strong>Date:</strong> <span id="summary-date">April 1, 2025</span></p>
+                <p><strong>Time:</strong> <span id="summary-time">11:30 AM - 1:30 PM</span></p>
+                <p><strong>Price:</strong> <span id="summary-price">$46.75 (15% discount applied)</span></p>
+                <p><strong>Booking Reference:</strong> #BK12345</p>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-outline" id="make-new-booking">Make Another Booking</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Store selection data
+        let selectedData = {
+            date: "April 1, 2025",
+            time: "11:30 AM - 1:30 PM",
+            price: "$46.75 (15% discount applied)",
+            originalPrice: "$55",
+            discount: "15% OFF"
+        };
+        
+        // Date selection update
+        const days = document.querySelectorAll('.day:not(.disabled)');
+        days.forEach(day => {
+            day.addEventListener('click', function() {
+                days.forEach(d => d.classList.remove('selected'));
+                this.classList.add('selected');
+                
+                // Update the selected date
+                const selectedDate = this.getAttribute('data-date');
+                selectedData.date = selectedDate;
+                
+                // Update the timeslot heading
+                document.getElementById('timeslot-date-heading').textContent = `Available Timeslots - ${selectedDate}`;
+                
+                // For demo purposes, we could also dynamically update timeslots
+                // This is simplified for the example, in a real app you'd fetch from a server
+                if (parseInt(this.textContent) % 2 === 0) {
+                    // Even days - different pricing and availability
+                    updateTimeslots([
+                        { time: "8:30 AM - 10:30 AM", price: "$40", availability: "15 spots", discount: null },
+                        { time: "11:00 AM - 1:00 PM", price: "$50", availability: "7 spots", discount: "20% OFF" },
+                        { time: "1:30 PM - 3:30 PM", price: "$60", availability: "12 spots", discount: null },
+                        { time: "4:00 PM - 6:00 PM", price: "$70", availability: "3 spots", discount: null },
+                        { time: "6:30 PM - 8:30 PM", price: "$80", availability: "8 spots", discount: "5% OFF" }
+                    ]);
+                } else {
+                    // Odd days - original pricing
+                    updateTimeslots([
+                        { time: "9:00 AM - 11:00 AM", price: "$45", availability: "8 spots", discount: null },
+                        { time: "11:30 AM - 1:30 PM", price: "$55", availability: "4 spots", discount: "15% OFF" },
+                        { time: "2:00 PM - 4:00 PM", price: "$65", availability: "10 spots", discount: null },
+                        { time: "4:30 PM - 6:30 PM", price: "$75", availability: "2 spots", discount: "10% OFF" },
+                        { time: "7:00 PM - 9:00 PM", price: "$85", availability: "12 spots", discount: null }
+                    ]);
+                }
+            });
+        });
+        
+        // Function to update timeslots
+        function updateTimeslots(slots) {
+            const timeslotsContainer = document.querySelector('.timeslots');
+            timeslotsContainer.innerHTML = '';
+            
+            slots.forEach((slot, index) => {
+                const timeslot = document.createElement('div');
+                timeslot.className = 'timeslot';
+                if (index === 1) {
+                    timeslot.classList.add('selected');
+                    
+                    // Update selected data
+                    selectedData.time = slot.time;
+                    selectedData.originalPrice = slot.price;
+                    selectedData.discount = slot.discount;
+                    
+                    // Calculate discounted price if there's a discount
+                    if (slot.discount) {
+                        const percentage = parseInt(slot.discount);
+                        const originalPrice = parseFloat(slot.price.replace('$', ''));
+                        const discountedPrice = originalPrice * (1 - percentage/100);
+                        selectedData.price = `$${discountedPrice.toFixed(2)} (${slot.discount} applied)`;
+                    } else {
+                        selectedData.price = slot.price;
+                    }
+                }
+                
+                timeslot.innerHTML = `
+                    <div class="timeslot-info">
+                        <span class="timeslot-time">${slot.time}</span>
+                        <span class="timeslot-price">${slot.price}</span>
+                    </div>
+                    <div class="timeslot-availability">${slot.availability} remaining</div>
+                    ${slot.discount ? `<div class="discount-banner">${slot.discount}</div>` : ''}
+                `;
+                
+                timeslot.addEventListener('click', function() {
+                    document.querySelectorAll('.timeslot').forEach(t => t.classList.remove('selected'));
+                    this.classList.add('selected');
+                    
+                    // Update selected data
+                    selectedData.time = slot.time;
+                    selectedData.originalPrice = slot.price;
+                    selectedData.discount = slot.discount;
+                    
+                    // Calculate discounted price if there's a discount
+                    if (slot.discount) {
+                        const percentage = parseInt(slot.discount);
+                        const originalPrice = parseFloat(slot.price.replace('$', ''));
+                        const discountedPrice = originalPrice * (1 - percentage/100);
+                        selectedData.price = `$${discountedPrice.toFixed(2)} (${slot.discount} applied)`;
+                    } else {
+                        selectedData.price = slot.price;
+                    }
+                });
+                
+                timeslotsContainer.appendChild(timeslot);
+            });
+        }
+        
+        // Step navigation
+        document.getElementById('step1-next').addEventListener('click', function() {
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('step2').classList.remove('hidden');
+            
+            // Update step indicators
+            document.querySelector('.booking-steps .step:nth-child(1)').classList.remove('active');
+            document.querySelector('.booking-steps .step:nth-child(1)').classList.add('completed');
+            document.querySelector('.booking-steps .step:nth-child(2)').classList.add('active');
+        });
+        
+        document.getElementById('step2-back').addEventListener('click', function() {
+            document.getElementById('step2').classList.add('hidden');
+            document.getElementById('step1').classList.remove('hidden');
+            
+            // Update step indicators
+            document.querySelector('.booking-steps .step:nth-child(1)').classList.add('active');
+            document.querySelector('.booking-steps .step:nth-child(1)').classList.remove('completed');
+            document.querySelector('.booking-steps .step:nth-child(2)').classList.remove('active');
+        });
+        
+        document.getElementById('step2-next').addEventListener('click', function() {
+            document.getElementById('step2').classList.add('hidden');
+            document.getElementById('step3').classList.remove('hidden');
+            
+            // Update summary
+            document.getElementById('summary-date').textContent = selectedData.date;
+            document.getElementById('summary-time').textContent = selectedData.time;
+            document.getElementById('summary-price').textContent = selectedData.price;
+            
+            // Update step indicators
+            document.querySelector('.booking-steps .step:nth-child(2)').classList.remove('active');
+            document.querySelector('.booking-steps .step:nth-child(2)').classList.add('completed');
+            document.querySelector('.booking-steps .step:nth-child(3)').classList.add('active');
+        });
+        
+        document.getElementById('make-new-booking').addEventListener('click', function() {
+            document.getElementById('step3').classList.add('hidden');
+            document.getElementById('step1').classList.remove('hidden');
+            
+            // Reset step indicators
+            document.querySelector('.booking-steps .step:nth-child(1)').classList.add('active');
+            document.querySelector('.booking-steps .step:nth-child(1)').classList.remove('completed');
+            document.querySelector('.booking-steps .step:nth-child(2)').classList.remove('active');
+            document.querySelector('.booking-steps .step:nth-child(2)').classList.remove('completed');
+            document.querySelector('.booking-steps .step:nth-child(3)').classList.remove('active');
+        });
+    </script>
+</body>
+</html>
