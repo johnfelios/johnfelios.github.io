@@ -1,5 +1,4 @@
 
-import { timeSlots } from "@/utils/mockData";
 import RoomCard from "./RoomCard";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -11,10 +10,8 @@ interface TimeSlotsProps {
 }
 
 const TimeSlots = ({ bookings, onBookPrivate, onBookOpen, onJoinOpen }: TimeSlotsProps) => {
-  const isMobile = useIsMobile();
-  
   return (
-    <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-2'} gap-4 pb-8`}>
+    <div className="grid grid-cols-1 gap-4 pb-8">
       {bookings.map((booking) => (
         <RoomCard
           key={booking.id}

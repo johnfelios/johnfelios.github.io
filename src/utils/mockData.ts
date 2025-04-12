@@ -14,7 +14,6 @@ export type BookingType = "private" | "open" | null;
 
 export type Booking = {
   id: string;
-  roomId: string;
   date: string;
   timeSlot: string;
   status: RoomStatus;
@@ -60,10 +59,7 @@ export const users: User[] = [
 
 // Available rooms
 export const rooms: Room[] = [
-  { id: "room1", name: "Yoga Studio" },
-  { id: "room2", name: "Weight Room" },
-  { id: "room3", name: "Cardio Area" },
-  { id: "room4", name: "Boxing Area" },
+  { id: "gym", name: "Gym" },
 ];
 
 // Generate time slots
@@ -83,38 +79,35 @@ for (let i = 0; i < 7; i++) {
 const generateInitialBookings = (): Booking[] => {
   const bookings: Booking[] = [];
   
-  rooms.forEach(room => {
-    dates.forEach(date => {
-      timeSlots.forEach(timeSlot => {
-        // Randomly assign status
-        const randomNum = Math.random();
-        let status: RoomStatus = "free";
-        let bookingType: BookingType = null;
-        let participants: User[] = [];
+  dates.forEach(date => {
+    timeSlots.forEach(timeSlot => {
+      // Randomly assign status
+      const randomNum = Math.random();
+      let status: RoomStatus = "free";
+      let bookingType: BookingType = null;
+      let participants: User[] = [];
+      
+      if (randomNum < 0.2) {
+        // 20% chance of being unavailable
+        status = "unavailable";
+      } else if (randomNum < 0.4) {
+        // 20% chance of being open
+        status = "open";
+        bookingType = "open";
         
-        if (randomNum < 0.2) {
-          // 20% chance of being unavailable
-          status = "unavailable";
-        } else if (randomNum < 0.4) {
-          // 20% chance of being open
-          status = "open";
-          bookingType = "open";
-          
-          // Add 1-3 random participants
-          const participantCount = Math.floor(Math.random() * 3) + 1;
-          const shuffledUsers = [...users].sort(() => 0.5 - Math.random());
-          participants = shuffledUsers.slice(0, participantCount);
-        }
-        
-        bookings.push({
-          id: `booking-${room.id}-${date}-${timeSlot}`,
-          roomId: room.id,
-          date,
-          timeSlot,
-          status,
-          bookingType,
-          participants
-        });
+        // Add 1-3 random participants
+        const participantCount = Math.floor(Math.random() * 3) + 1;
+        const shuffledUsers = [...users].sort(() => 0.5 - Math.random());
+        participants = shuffledUsers.slice(0, participantCount);
+      }
+      
+      bookings.push({
+        id: `booking-${date}-${timeSlot}`,
+        date,
+        timeSlot,
+        status,
+        bookingType,
+        participants
       });
     });
   });

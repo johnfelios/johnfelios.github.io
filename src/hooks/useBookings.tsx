@@ -1,17 +1,16 @@
 
 import { useState } from "react";
-import { initialBookings, rooms, currentUser, Booking, RoomStatus, BookingType } from "@/utils/mockData";
+import { initialBookings, currentUser, Booking, RoomStatus, BookingType } from "@/utils/mockData";
 import { toast } from "sonner";
 
 export const useBookings = () => {
   const [bookings, setBookings] = useState<Booking[]>(initialBookings);
   const [selectedDate, setSelectedDate] = useState<string>(initialBookings[0].date);
-  const [selectedRoom, setSelectedRoom] = useState<string>(rooms[0].id);
 
-  // Get bookings for the selected date and room
+  // Get bookings for the selected date
   const getFilteredBookings = () => {
     return bookings.filter(
-      booking => booking.date === selectedDate && booking.roomId === selectedRoom
+      booking => booking.date === selectedDate
     );
   };
 
@@ -92,8 +91,6 @@ export const useBookings = () => {
     bookings,
     selectedDate,
     setSelectedDate,
-    selectedRoom,
-    setSelectedRoom,
     getFilteredBookings,
     bookPrivate,
     bookOpen,
