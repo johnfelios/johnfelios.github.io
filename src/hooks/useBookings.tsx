@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { initialBookings, rooms, currentUser, Booking, RoomStatus, BookingType } from "@/utils/mockData";
-import { toast } from "@/components/ui/sonner";
+import { toast } from "sonner";
 
 export const useBookings = () => {
   const [bookings, setBookings] = useState<Booking[]>(initialBookings);
