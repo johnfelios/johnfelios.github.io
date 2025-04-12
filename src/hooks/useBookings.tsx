@@ -63,7 +63,11 @@ export const useBookings = () => {
 
     updateBookingStatus(bookingId, "unavailable", "private", invitedUsers);
     
-    // We won't show toast here since we're showing a confirmation dialog instead
+    const inviteText = invitedUsers.length > 0 
+      ? ` with ${invitedUsers.length} friend${invitedUsers.length !== 1 ? 's' : ''}`
+      : '';
+    
+    toast.success(`Room booked privately${inviteText}! ${totalPoints} points deducted.`);
   };
 
   // Book an open room (10 points)
