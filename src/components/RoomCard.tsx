@@ -1,19 +1,22 @@
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Booking } from "@/utils/mockData";
 import UserAvatar from "./UserAvatar";
-import { Clock, Users, Dumbbell } from "lucide-react";
+import { Clock, Users, Dumbbell, UserPlus } from "lucide-react";
+import InviteFriendsDialog from "./InviteFriendsDialog";
 
 interface RoomCardProps {
   booking: Booking;
-  onBookPrivate: (id: string) => void;
+  onBookPrivate: (id: string, invitedUsers: string[]) => void;
   onBookOpen: (id: string) => void;
   onJoinOpen: (id: string) => void;
 }
 
 const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardProps) => {
   const { status, timeSlot, participants, bookingType, id } = booking;
+  const [inviteDialogOpen, setInviteDialogOpen] = useState(false);
 
   // Different card styles based on room status
   const cardStyles = {
@@ -24,12 +27,12 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
 
   // Render participants avatars for open rooms
   const renderParticipants = () => {
-    if (status === "open" && participants.length > 0) {
+    if ((status === "open" || status === "unavailable") && participants.length > 0) {
       return (
         <div className="mt-4">
           <div className="flex items-center gap-1 mb-3">
-            <Users size={20} className="text-yellow-300" />
-            <span className="text-base font-medium text-yellow-100">Participants</span>
+            <Users size={20} className={status === "open" ? "text-yellow-300" : "text-purple-300"} />
+            <span className={`text-base font-medium ${status === "open" ? "text-yellow-100" : "text-purple-100"}`}>Participants</span>
           </div>
           <div className="flex flex-wrap gap-2">
             {participants.map(user => (
@@ -42,16 +45,26 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
     return null;
   };
 
+  // Handle private booking with friends
+  const handleOpenInviteDialog = () => {
+    setInviteDialogOpen(true);
+  };
+
+  const handleInviteConfirm = (invitedUserIds: string[]) => {
+    onBookPrivate(id, invitedUserIds);
+  };
+
   // Render action buttons based on room status
   const renderActions = () => {
     if (status === "free") {
       return (
         <div className="flex flex-col gap-3 mt-4">
           <Button 
-            className="bg-purple-600 hover:bg-purple-700 text-white text-base py-6"
-            onClick={() => onBookPrivate(id)}
+            className="bg-purple-600 hover:bg-purple-700 text-white text-base py-6 flex items-center justify-center gap-2"
+            onClick={handleOpenInviteDialog}
           >
-            Book Private (40pts)
+            <UserPlus size={18} />
+            Book Private Session
           </Button>
           <Button 
             variant="outline" 
@@ -78,31 +91,39 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
   };
 
   return (
-    <Card className={`${cardStyles[status]} transition-all duration-200 border h-full overflow-hidden`}>
-      <CardContent className="p-5">
-        <div className="flex items-center gap-2 mb-3">
-          <Clock size={20} className="text-gray-400" />
-          <span className="text-xl font-medium text-white">{timeSlot}</span>
-        </div>
-        
-        {/* Status indicator */}
-        <div className="flex items-center gap-2 mb-2">
-          <Dumbbell size={20} className={status === "free" ? "text-green-400" : status === "open" ? "text-yellow-400" : "text-gray-500"} />
-          <span className={`text-lg font-medium ${
-            status === "free" ? "text-green-300" : 
-            status === "open" ? "text-yellow-300" : 
-            "text-gray-400"
-          }`}>
-            {status === "free" && "Available"}
-            {status === "open" && "Open Session"}
-            {status === "unavailable" && "Not Available"}
-          </span>
-        </div>
-        
-        {renderParticipants()}
-        {renderActions()}
-      </CardContent>
-    </Card>
+    <>
+      <Card className={`${cardStyles[status]} transition-all duration-200 border h-full overflow-hidden`}>
+        <CardContent className="p-5">
+          <div className="flex items-center gap-2 mb-3">
+            <Clock size={20} className="text-gray-400" />
+            <span className="text-xl font-medium text-white">{timeSlot}</span>
+          </div>
+          
+          {/* Status indicator */}
+          <div className="flex items-center gap-2 mb-2">
+            <Dumbbell size={20} className={status === "free" ? "text-green-400" : status === "open" ? "text-yellow-400" : "text-gray-500"} />
+            <span className={`text-lg font-medium ${
+              status === "free" ? "text-green-300" : 
+              status === "open" ? "text-yellow-300" : 
+              "text-gray-400"
+            }`}>
+              {status === "free" && "Available"}
+              {status === "open" && "Open Session"}
+              {status === "unavailable" && "Private Session"}
+            </span>
+          </div>
+          
+          {renderParticipants()}
+          {renderActions()}
+        </CardContent>
+      </Card>
+
+      <InviteFriendsDialog
+        isOpen={inviteDialogOpen}
+        onClose={() => setInviteDialogOpen(false)}
+        onConfirm={handleInviteConfirm}
+      />
+    </>
   );
 };
 

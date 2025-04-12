@@ -4,7 +4,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 interface TimeSlotsProps {
   bookings: any[];
-  onBookPrivate: (id: string) => void;
+  onBookPrivate: (id: string, invitedUsers: string[]) => void;
   onBookOpen: (id: string) => void;
   onJoinOpen: (id: string) => void;
 }

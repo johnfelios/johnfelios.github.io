@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { initialBookings, currentUser, Booking, RoomStatus, BookingType } from "@/utils/mockData";
+import { initialBookings, currentUser, Booking, RoomStatus, BookingType, users } from "@/utils/mockData";
 import { toast } from "sonner";
 
 export const useBookings = () => {
@@ -15,12 +15,28 @@ export const useBookings = () => {
   };
 
   // Update booking status
-  const updateBookingStatus = (bookingId: string, status: RoomStatus, bookingType: BookingType) => {
+  const updateBookingStatus = (bookingId: string, status: RoomStatus, bookingType: BookingType, invitedUsers: string[] = []) => {
     setBookings(prevBookings => 
       prevBookings.map(booking => {
         if (booking.id === bookingId) {
-          const updatedParticipants = status === "open" ? [currentUser] : 
-                                     (status === "free" ? [] : booking.participants);
+          // For private bookings, add invited users to participants
+          let updatedParticipants = [];
+          
+          if (status === "unavailable" && bookingType === "private") {
+            // Add current user and invited users
+            updatedParticipants = [currentUser];
+            
+            // Add invited users from user IDs
+            const invitedUserObjects = users.filter(user => 
+              invitedUsers.includes(user.id) && user.id !== currentUser.id
+            );
+            
+            updatedParticipants = [...updatedParticipants, ...invitedUserObjects];
+          } else if (status === "open") {
+            updatedParticipants = [currentUser];
+          } else {
+            updatedParticipants = [];
+          }
           
           return {
             ...booking,
@@ -34,15 +50,24 @@ export const useBookings = () => {
     );
   };
 
-  // Book a private room (40 points)
-  const bookPrivate = (bookingId: string) => {
-    if (currentUser.points < 40) {
-      toast.error("Not enough points! You need 40 points to book a private room.");
+  // Book a private room (40 points + 5 per invited user)
+  const bookPrivate = (bookingId: string, invitedUsers: string[] = []) => {
+    const basePoints = 40;
+    const additionalPoints = invitedUsers.length * 5;
+    const totalPoints = basePoints + additionalPoints;
+    
+    if (currentUser.points < totalPoints) {
+      toast.error(`Not enough points! You need ${totalPoints} points to book a private room with ${invitedUsers.length} friend${invitedUsers.length !== 1 ? 's' : ''}.`);
       return;
     }
 
-    updateBookingStatus(bookingId, "unavailable", "private");
-    toast.success("Room booked privately! 40 points deducted.");
+    updateBookingStatus(bookingId, "unavailable", "private", invitedUsers);
+    
+    const inviteText = invitedUsers.length > 0 
+      ? ` with ${invitedUsers.length} friend${invitedUsers.length !== 1 ? 's' : ''}`
+      : '';
+    
+    toast.success(`Room booked privately${inviteText}! ${totalPoints} points deducted.`);
   };
 
   // Book an open room (10 points)
