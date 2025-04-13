@@ -64,8 +64,8 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				gym: {
-					free: '#F2FCE2',
-					open: '#FEF7CD',
+					free: '#155E3A',
+					open: '#854D0E',
 					unavailable: '#C8C8C9'
 				}
 			},

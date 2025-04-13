@@ -20,7 +20,7 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
 
   // Different card styles based on room status
   const cardStyles = {
-    free: "border-gray-700 bg-gradient-to-b from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800",
+    free: "border-green-700 bg-gradient-to-b from-green-900 to-gray-900 hover:from-green-800 hover:to-gray-800",
     open: "border-gray-700 bg-gradient-to-b from-yellow-950 to-gray-900 hover:from-yellow-900 hover:to-gray-800",
     unavailable: "border-gray-800 bg-gradient-to-b from-gray-950 to-gray-900 opacity-70"
   };
