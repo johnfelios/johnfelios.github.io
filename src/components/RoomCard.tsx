@@ -20,8 +20,8 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
 
   // Different card styles based on room status
   const cardStyles = {
-    free: "border-green-800 bg-gradient-to-b from-green-950 to-green-900 hover:from-green-900 hover:to-green-950",
-    open: "border-yellow-800 bg-gradient-to-b from-yellow-950 to-yellow-900 hover:from-yellow-900 hover:to-yellow-950",
+    free: "border-gray-700 bg-gradient-to-b from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800",
+    open: "border-gray-700 bg-gradient-to-b from-yellow-950 to-gray-900 hover:from-yellow-900 hover:to-gray-800",
     unavailable: "border-gray-800 bg-gradient-to-b from-gray-950 to-gray-900 opacity-70"
   };
 
@@ -31,8 +31,8 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
       return (
         <div className="mt-4">
           <div className="flex items-center gap-1 mb-3">
-            <Users size={20} className={status === "open" ? "text-yellow-300" : "text-purple-300"} />
-            <span className={`text-base font-medium ${status === "open" ? "text-yellow-100" : "text-purple-100"}`}>Participants</span>
+            <Users size={20} className={status === "open" ? "text-yellow-300" : "text-gray-300"} />
+            <span className={`text-base font-medium ${status === "open" ? "text-yellow-100" : "text-gray-100"}`}>Participants</span>
           </div>
           <div className="flex flex-wrap gap-2">
             {participants.map(user => (
@@ -60,7 +60,7 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
       return (
         <div className="flex flex-col gap-3 mt-4">
           <Button 
-            className="bg-purple-600 hover:bg-purple-700 text-white text-base py-6 flex items-center justify-center gap-2"
+            className="bg-gray-800 hover:bg-gray-700 text-white text-base py-6 flex items-center justify-center gap-2"
             onClick={handleOpenInviteDialog}
           >
             <UserPlus size={18} />
@@ -68,7 +68,7 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
           </Button>
           <Button 
             variant="outline" 
-            className="border-purple-500 text-purple-300 hover:bg-purple-950 text-base py-6"
+            className="border-gray-500 text-gray-300 hover:bg-gray-800 text-base py-6"
             onClick={() => onBookOpen(id)}
           >
             Book Open (10pts)
@@ -79,7 +79,7 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
       return (
         <div className="mt-4">
           <Button 
-            className="w-full bg-yellow-600 hover:bg-yellow-700 text-white text-base py-6"
+            className="w-full bg-yellow-800 hover:bg-yellow-700 text-white text-base py-6"
             onClick={() => onJoinOpen(id)}
           >
             Join Open (10pts)
