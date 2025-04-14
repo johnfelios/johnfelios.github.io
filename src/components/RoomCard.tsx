@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Booking } from "@/utils/mockData";
@@ -22,6 +22,18 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
   const [joinConfirmOpen, setJoinConfirmOpen] = useState(false);
   const [selectedInvites, setSelectedInvites] = useState<string[]>([]);
   const [selectedBookingType, setSelectedBookingType] = useState<'private' | 'open' | null>(null);
+
+  // Clear selections when dialogs are closed
+  useEffect(() => {
+    if (!bookingConfirmOpen && !joinConfirmOpen && !inviteDialogOpen) {
+      // Reset states only when all dialogs are closed
+      setTimeout(() => {
+        if (!bookingConfirmOpen && !joinConfirmOpen && !inviteDialogOpen) {
+          setSelectedBookingType(null);
+        }
+      }, 200);
+    }
+  }, [bookingConfirmOpen, joinConfirmOpen, inviteDialogOpen]);
 
   // Different card styles based on room status
   const cardStyles = {
@@ -58,11 +70,7 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
   const handleInviteConfirm = (invitedUserIds: string[]) => {
     setSelectedInvites(invitedUserIds);
     setSelectedBookingType('private');
-    
-    // Delay showing the confirmation dialog to avoid event conflicts
-    setTimeout(() => {
-      setBookingConfirmOpen(true);
-    }, 150);
+    setBookingConfirmOpen(true);
   };
 
   // Handle booking confirmations
@@ -81,20 +89,12 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
     } else if (selectedBookingType === 'open') {
       onBookOpen(id);
     }
-    
-    // Delay closing to avoid event conflicts
-    setTimeout(() => {
-      setBookingConfirmOpen(false);
-    }, 100);
+    setBookingConfirmOpen(false);
   };
 
   const confirmJoin = () => {
     onJoinOpen(id);
-    
-    // Delay closing to avoid event conflicts
-    setTimeout(() => {
-      setJoinConfirmOpen(false);
-    }, 100);
+    setJoinConfirmOpen(false);
   };
 
   // Calculate booking cost
@@ -147,27 +147,18 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
 
   // Handle modal close events
   const handleInviteDialogClose = () => {
-    // Small delay to prevent event conflicts
-    setTimeout(() => {
-      setInviteDialogOpen(false);
-    }, 100);
+    setInviteDialogOpen(false);
   };
 
   const handleBookingConfirmClose = (open: boolean) => {
     if (!open) {
-      // Small delay to prevent event conflicts
-      setTimeout(() => {
-        setBookingConfirmOpen(false);
-      }, 100);
+      setBookingConfirmOpen(false);
     }
   };
 
   const handleJoinConfirmClose = (open: boolean) => {
     if (!open) {
-      // Small delay to prevent event conflicts
-      setTimeout(() => {
-        setJoinConfirmOpen(false);
-      }, 100);
+      setJoinConfirmOpen(false);
     }
   };
 

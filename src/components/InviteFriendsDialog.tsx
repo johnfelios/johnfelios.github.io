@@ -34,18 +34,13 @@ const InviteFriendsDialog = ({ isOpen, onClose, onConfirm }: InviteFriendsDialog
   };
   
   const handleConfirm = () => {
-    onConfirm(selectedUsers);
-    // Using setTimeout to avoid race conditions with event handlers
-    setTimeout(() => {
-      onClose();
-    }, 100);
+    const selectedUsersCopy = [...selectedUsers];
+    onConfirm(selectedUsersCopy);
+    onClose();
   };
 
   const handleClose = () => {
-    // Using setTimeout to avoid race conditions with event handlers
-    setTimeout(() => {
-      onClose();
-    }, 100);
+    onClose();
   };
   
   const calculateTotalPoints = () => {
