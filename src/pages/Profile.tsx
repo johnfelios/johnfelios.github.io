@@ -50,12 +50,12 @@ const ProfilePage = () => {
           </CardHeader>
           <CardContent className="flex flex-col md:flex-row items-center gap-6">
             <div className="flex-shrink-0">
-              <UserAvatar user={currentUser} size="xl" />
+              <UserAvatar user={currentUser} size="lg" />
             </div>
             <div className="flex-grow space-y-4">
               <div>
                 <h3 className="text-lg font-medium text-white">{currentUser.name}</h3>
-                <p className="text-gray-400">{currentUser.email}</p>
+                <p className="text-gray-400">{currentUser.id}</p>
               </div>
               <div className="flex items-center gap-2">
                 <div className="px-4 py-2 bg-gray-700 rounded-lg">

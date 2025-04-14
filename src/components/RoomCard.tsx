@@ -16,12 +16,12 @@ interface RoomCardProps {
 }
 
 const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardProps) => {
-  const { status, timeSlot, participants, bookingType, id } = booking;
+  const { status, timeSlot, participants, bookingType: roomBookingType, id } = booking;
   const [inviteDialogOpen, setInviteDialogOpen] = useState(false);
   const [bookingConfirmOpen, setBookingConfirmOpen] = useState(false);
   const [joinConfirmOpen, setJoinConfirmOpen] = useState(false);
   const [selectedInvites, setSelectedInvites] = useState<string[]>([]);
-  const [bookingType, setBookingType] = useState<'private' | 'open' | null>(null);
+  const [selectedBookingType, setSelectedBookingType] = useState<'private' | 'open' | null>(null);
 
   // Different card styles based on room status
   const cardStyles = {
@@ -57,13 +57,13 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
 
   const handleInviteConfirm = (invitedUserIds: string[]) => {
     setSelectedInvites(invitedUserIds);
-    setBookingType('private');
+    setSelectedBookingType('private');
     setBookingConfirmOpen(true);
   };
 
   // Handle booking confirmations
   const handleBookOpenConfirm = () => {
-    setBookingType('open');
+    setSelectedBookingType('open');
     setBookingConfirmOpen(true);
   };
 
@@ -72,9 +72,9 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
   };
 
   const confirmBooking = () => {
-    if (bookingType === 'private') {
+    if (selectedBookingType === 'private') {
       onBookPrivate(id, selectedInvites);
-    } else if (bookingType === 'open') {
+    } else if (selectedBookingType === 'open') {
       onBookOpen(id);
     }
     setBookingConfirmOpen(false);
@@ -87,11 +87,11 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
 
   // Calculate booking cost
   const getBookingCost = () => {
-    if (bookingType === 'private') {
+    if (selectedBookingType === 'private') {
       const basePoints = 40;
       const additionalPoints = selectedInvites.length * 5;
       return basePoints + additionalPoints;
-    } else if (bookingType === 'open') {
+    } else if (selectedBookingType === 'open') {
       return 10;
     }
     return 0;
@@ -173,8 +173,8 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
           <AlertDialogHeader>
             <AlertDialogTitle className="text-white">Confirm Booking</AlertDialogTitle>
             <AlertDialogDescription className="text-gray-300">
-              You are about to book a {bookingType === 'private' ? 'private' : 'open'} session at {timeSlot}.
-              {bookingType === 'private' && selectedInvites.length > 0 && (
+              You are about to book a {selectedBookingType === 'private' ? 'private' : 'open'} session at {timeSlot}.
+              {selectedBookingType === 'private' && selectedInvites.length > 0 && (
                 <p className="mt-2">You've invited {selectedInvites.length} friend{selectedInvites.length !== 1 ? 's' : ''}.</p>
               )}
               <p className="mt-2 font-medium text-white">Cost: {getBookingCost()} points</p>
