@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
@@ -5,9 +6,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { currentUser } from "@/utils/mockData";
 import UserAvatar from "@/components/UserAvatar";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
-import { CreditCard, Gift, Package, Info, ArrowLeft } from "lucide-react";
+import { CreditCard, Gift, Package, Info } from "lucide-react";
 import { toast } from "sonner";
-import { Link } from "react-router-dom";
 
 const pointPackages = [
   { id: 1, name: "Starter Pack", points: 100, price: 9.99, discount: 0 },
@@ -48,25 +48,14 @@ const ProfilePage = () => {
   pointsExpirationDate.setFullYear(pointsExpirationDate.getFullYear() + 1);
   
   return (
-    <div className="flex flex-col min-h-screen bg-gray-950">
+    <div className="flex flex-col min-h-screen bg-gray-900">
       <Header />
       
       <div className="container max-w-4xl mx-auto py-8 px-4">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-white">My Profile</h1>
-          <Link to="/">
-            <Button 
-              variant="outline" 
-              className="flex items-center gap-2 border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white"
-            >
-              <ArrowLeft size={16} />
-              Back to Sessions
-            </Button>
-          </Link>
-        </div>
+        <h1 className="text-3xl font-bold text-white mb-8">My Profile</h1>
         
         {/* User Profile Card */}
-        <Card className="bg-gray-900 border-gray-800 shadow-lg mb-10">
+        <Card className="bg-gray-800 border-gray-700 shadow-lg mb-10">
           <CardHeader>
             <CardTitle className="text-white text-2xl">User Information</CardTitle>
             <CardDescription className="text-gray-400">Your personal details and point balance</CardDescription>
@@ -99,7 +88,7 @@ const ProfilePage = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
           {pointPackages.map(pkg => (
-            <Card key={pkg.id} className="bg-gray-900 border-gray-800 shadow-lg">
+            <Card key={pkg.id} className="bg-gray-800 border-gray-700 shadow-lg">
               <CardHeader>
                 <CardTitle className="text-white flex items-center gap-2">
                   {pkg.id === 1 && <Package className="text-gray-300" />}
@@ -128,7 +117,7 @@ const ProfilePage = () => {
         </div>
         
         {/* Points Information */}
-        <Card className="bg-gray-900 border-gray-800 shadow-lg">
+        <Card className="bg-gray-800 border-gray-700 shadow-lg">
           <CardHeader className="flex flex-row items-center gap-2">
             <Info className="h-5 w-5 text-gray-400" />
             <CardTitle className="text-white">Points Information</CardTitle>
@@ -146,7 +135,7 @@ const ProfilePage = () => {
       
       {/* Purchase Confirmation Dialog */}
       <AlertDialog open={purchaseDialogOpen} onOpenChange={handlePurchaseDialogClose}>
-        <AlertDialogContent className="bg-gray-900 border border-gray-800 z-50">
+        <AlertDialogContent className="bg-gray-900 border border-gray-700 z-50">
           <AlertDialogHeader>
             <AlertDialogTitle className="text-white">Confirm Purchase</AlertDialogTitle>
             <AlertDialogDescription className="text-gray-300">

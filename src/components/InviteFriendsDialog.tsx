@@ -49,7 +49,7 @@ const InviteFriendsDialog = ({ isOpen, onClose, onConfirm }: InviteFriendsDialog
   
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && handleClose()}>
-      <DialogContent className="bg-gray-900 border-gray-800 text-white z-50">
+      <DialogContent className="bg-gray-800 border-gray-700 text-white z-50">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold text-white">Invite Friends</DialogTitle>
           <DialogDescription className="text-gray-300">
@@ -66,12 +66,12 @@ const InviteFriendsDialog = ({ isOpen, onClose, onConfirm }: InviteFriendsDialog
           
           <div className="space-y-3 mt-4 max-h-60 overflow-y-auto pr-2">
             {otherUsers.map(user => (
-              <div key={user.id} className="flex items-center space-x-3 p-2 rounded-lg bg-gray-800">
+              <div key={user.id} className="flex items-center space-x-3 p-2 rounded-lg bg-gray-700">
                 <Checkbox 
                   id={`user-${user.id}`}
                   checked={selectedUsers.includes(user.id)}
                   onCheckedChange={() => handleToggleUser(user.id)}
-                  className="border-gray-600"
+                  className="border-purple-400"
                 />
                 <label 
                   htmlFor={`user-${user.id}`}
@@ -89,13 +89,13 @@ const InviteFriendsDialog = ({ isOpen, onClose, onConfirm }: InviteFriendsDialog
           <Button 
             variant="outline" 
             onClick={handleClose}
-            className="border-gray-700 text-gray-300 hover:bg-gray-800"
+            className="border-gray-600 text-gray-300 hover:bg-gray-700"
           >
             Cancel
           </Button>
           <Button 
             onClick={handleConfirm}
-            className="bg-gray-700 hover:bg-gray-600"
+            className="bg-purple-600 hover:bg-purple-700"
           >
             Book for {calculateTotalPoints()} points
           </Button>
