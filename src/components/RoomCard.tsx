@@ -6,6 +6,7 @@ import { Booking } from "@/utils/mockData";
 import UserAvatar from "./UserAvatar";
 import { Clock, Users, Dumbbell, UserPlus } from "lucide-react";
 import InviteFriendsDialog from "./InviteFriendsDialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "./ui/alert-dialog";
 
 interface RoomCardProps {
   booking: Booking;
@@ -17,6 +18,10 @@ interface RoomCardProps {
 const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardProps) => {
   const { status, timeSlot, participants, bookingType, id } = booking;
   const [inviteDialogOpen, setInviteDialogOpen] = useState(false);
+  const [bookingConfirmOpen, setBookingConfirmOpen] = useState(false);
+  const [joinConfirmOpen, setJoinConfirmOpen] = useState(false);
+  const [selectedInvites, setSelectedInvites] = useState<string[]>([]);
+  const [bookingType, setBookingType] = useState<'private' | 'open' | null>(null);
 
   // Different card styles based on room status
   const cardStyles = {
@@ -51,7 +56,45 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
   };
 
   const handleInviteConfirm = (invitedUserIds: string[]) => {
-    onBookPrivate(id, invitedUserIds);
+    setSelectedInvites(invitedUserIds);
+    setBookingType('private');
+    setBookingConfirmOpen(true);
+  };
+
+  // Handle booking confirmations
+  const handleBookOpenConfirm = () => {
+    setBookingType('open');
+    setBookingConfirmOpen(true);
+  };
+
+  const handleJoinOpenConfirm = () => {
+    setJoinConfirmOpen(true);
+  };
+
+  const confirmBooking = () => {
+    if (bookingType === 'private') {
+      onBookPrivate(id, selectedInvites);
+    } else if (bookingType === 'open') {
+      onBookOpen(id);
+    }
+    setBookingConfirmOpen(false);
+  };
+
+  const confirmJoin = () => {
+    onJoinOpen(id);
+    setJoinConfirmOpen(false);
+  };
+
+  // Calculate booking cost
+  const getBookingCost = () => {
+    if (bookingType === 'private') {
+      const basePoints = 40;
+      const additionalPoints = selectedInvites.length * 5;
+      return basePoints + additionalPoints;
+    } else if (bookingType === 'open') {
+      return 10;
+    }
+    return 0;
   };
 
   // Render action buttons based on room status
@@ -69,7 +112,7 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
           <Button 
             variant="outline" 
             className="border-gray-500 text-gray-300 hover:bg-gray-800 text-base py-6"
-            onClick={() => onBookOpen(id)}
+            onClick={handleBookOpenConfirm}
           >
             Book Open (10pts)
           </Button>
@@ -80,7 +123,7 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
         <div className="mt-4">
           <Button 
             className="w-full bg-yellow-800 hover:bg-yellow-700 text-white text-base py-6"
-            onClick={() => onJoinOpen(id)}
+            onClick={handleJoinOpenConfirm}
           >
             Join Open (10pts)
           </Button>
@@ -123,6 +166,43 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
         onClose={() => setInviteDialogOpen(false)}
         onConfirm={handleInviteConfirm}
       />
+
+      {/* Booking Confirmation Dialog */}
+      <AlertDialog open={bookingConfirmOpen} onOpenChange={setBookingConfirmOpen}>
+        <AlertDialogContent className="bg-gray-900 border border-gray-700">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-white">Confirm Booking</AlertDialogTitle>
+            <AlertDialogDescription className="text-gray-300">
+              You are about to book a {bookingType === 'private' ? 'private' : 'open'} session at {timeSlot}.
+              {bookingType === 'private' && selectedInvites.length > 0 && (
+                <p className="mt-2">You've invited {selectedInvites.length} friend{selectedInvites.length !== 1 ? 's' : ''}.</p>
+              )}
+              <p className="mt-2 font-medium text-white">Cost: {getBookingCost()} points</p>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel className="bg-gray-800 hover:bg-gray-700 text-white border-gray-600">Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={confirmBooking} className="bg-green-700 hover:bg-green-600 text-white">Confirm Booking</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Join Confirmation Dialog */}
+      <AlertDialog open={joinConfirmOpen} onOpenChange={setJoinConfirmOpen}>
+        <AlertDialogContent className="bg-gray-900 border border-gray-700">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-white">Confirm Join</AlertDialogTitle>
+            <AlertDialogDescription className="text-gray-300">
+              You are about to join an open session at {timeSlot}.
+              <p className="mt-2 font-medium text-white">Cost: 10 points</p>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel className="bg-gray-800 hover:bg-gray-700 text-white border-gray-600">Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={confirmJoin} className="bg-yellow-800 hover:bg-yellow-700 text-white">Confirm Join</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   );
 };
