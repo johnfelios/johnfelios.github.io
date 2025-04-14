@@ -25,9 +25,9 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
 
   // Different card styles based on room status
   const cardStyles = {
-    free: "border-green-700 bg-gradient-to-b from-green-900 to-gray-900 hover:from-green-800 hover:to-gray-800",
-    open: "border-gray-700 bg-gradient-to-b from-yellow-950 to-gray-900 hover:from-yellow-900 hover:to-gray-800",
-    unavailable: "border-gray-800 bg-gradient-to-b from-gray-950 to-gray-900 opacity-70"
+    free: "border-gray-800 bg-gradient-to-b from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800",
+    open: "border-gray-700 bg-gradient-to-b from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800",
+    unavailable: "border-gray-800 bg-gradient-to-b from-gray-900 to-gray-950 opacity-70"
   };
 
   // Render participants avatars for open rooms
@@ -36,8 +36,8 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
       return (
         <div className="mt-4">
           <div className="flex items-center gap-1 mb-3">
-            <Users size={20} className={status === "open" ? "text-yellow-300" : "text-gray-300"} />
-            <span className={`text-base font-medium ${status === "open" ? "text-yellow-100" : "text-gray-100"}`}>Participants</span>
+            <Users size={20} className="text-gray-300" />
+            <span className="text-base font-medium text-gray-100">Participants</span>
           </div>
           <div className="flex flex-wrap gap-2">
             {participants.map(user => (
@@ -111,7 +111,7 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
           </Button>
           <Button 
             variant="outline" 
-            className="border-gray-500 text-gray-300 hover:bg-gray-800 text-base py-6"
+            className="border-gray-700 text-gray-300 hover:bg-gray-800 text-base py-6"
             onClick={handleBookOpenConfirm}
           >
             Book Open (10pts)
@@ -122,7 +122,7 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
       return (
         <div className="mt-4">
           <Button 
-            className="w-full bg-yellow-800 hover:bg-yellow-700 text-white text-base py-6"
+            className="w-full bg-gray-700 hover:bg-gray-600 text-white text-base py-6"
             onClick={handleJoinOpenConfirm}
           >
             Join Open (10pts)
@@ -170,10 +170,10 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
           
           {/* Status indicator */}
           <div className="flex items-center gap-2 mb-2">
-            <Dumbbell size={20} className={status === "free" ? "text-green-400" : status === "open" ? "text-yellow-400" : "text-gray-500"} />
+            <Dumbbell size={20} className={status === "free" ? "text-gray-300" : status === "open" ? "text-gray-300" : "text-gray-500"} />
             <span className={`text-lg font-medium ${
-              status === "free" ? "text-green-300" : 
-              status === "open" ? "text-yellow-300" : 
+              status === "free" ? "text-gray-100" : 
+              status === "open" ? "text-gray-100" : 
               "text-gray-400"
             }`}>
               {status === "free" && "Available"}
@@ -195,7 +195,7 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
 
       {/* Booking Confirmation Dialog */}
       <AlertDialog open={bookingConfirmOpen} onOpenChange={handleBookingConfirmClose}>
-        <AlertDialogContent className="bg-gray-900 border border-gray-700 z-50">
+        <AlertDialogContent className="bg-gray-900 border border-gray-800 z-50">
           <AlertDialogHeader>
             <AlertDialogTitle className="text-white">Confirm Booking</AlertDialogTitle>
             <AlertDialogDescription className="text-gray-300">
@@ -207,15 +207,15 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel className="bg-gray-800 hover:bg-gray-700 text-white border-gray-600">Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={confirmBooking} className="bg-green-700 hover:bg-green-600 text-white">Confirm Booking</AlertDialogAction>
+            <AlertDialogCancel className="bg-gray-800 hover:bg-gray-700 text-white border-gray-700">Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={confirmBooking} className="bg-gray-700 hover:bg-gray-600 text-white">Confirm Booking</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
 
       {/* Join Confirmation Dialog */}
       <AlertDialog open={joinConfirmOpen} onOpenChange={handleJoinConfirmClose}>
-        <AlertDialogContent className="bg-gray-900 border border-gray-700 z-50">
+        <AlertDialogContent className="bg-gray-900 border border-gray-800 z-50">
           <AlertDialogHeader>
             <AlertDialogTitle className="text-white">Confirm Join</AlertDialogTitle>
             <AlertDialogDescription className="text-gray-300">
@@ -224,8 +224,8 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel className="bg-gray-800 hover:bg-gray-700 text-white border-gray-600">Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={confirmJoin} className="bg-yellow-800 hover:bg-yellow-700 text-white">Confirm Join</AlertDialogAction>
+            <AlertDialogCancel className="bg-gray-800 hover:bg-gray-700 text-white border-gray-700">Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={confirmJoin} className="bg-gray-700 hover:bg-gray-600 text-white">Confirm Join</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
