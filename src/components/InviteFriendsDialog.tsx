@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -15,6 +15,13 @@ interface InviteFriendsDialogProps {
 const InviteFriendsDialog = ({ isOpen, onClose, onConfirm }: InviteFriendsDialogProps) => {
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   
+  // Reset selected users when dialog opens/closes
+  useEffect(() => {
+    if (!isOpen) {
+      setSelectedUsers([]);
+    }
+  }, [isOpen]);
+  
   // Get all users except current user
   const otherUsers = users.filter(user => user.id !== currentUser.id);
   
@@ -28,19 +35,17 @@ const InviteFriendsDialog = ({ isOpen, onClose, onConfirm }: InviteFriendsDialog
   
   const handleConfirm = () => {
     onConfirm(selectedUsers);
-    setSelectedUsers([]);
     // Using setTimeout to avoid race conditions with event handlers
     setTimeout(() => {
       onClose();
-    }, 0);
+    }, 100);
   };
 
   const handleClose = () => {
-    setSelectedUsers([]);
     // Using setTimeout to avoid race conditions with event handlers
     setTimeout(() => {
       onClose();
-    }, 0);
+    }, 100);
   };
   
   const calculateTotalPoints = () => {

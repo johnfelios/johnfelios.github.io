@@ -6,8 +6,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { currentUser } from "@/utils/mockData";
 import UserAvatar from "@/components/UserAvatar";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
-import { CreditCard, Gift, Package, Info } from "lucide-react";
+import { CreditCard, Gift, Package, Info, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 
 const pointPackages = [
   { id: 1, name: "Starter Pack", points: 100, price: 9.99, discount: 0 },
@@ -52,7 +53,15 @@ const ProfilePage = () => {
       <Header />
       
       <div className="container max-w-4xl mx-auto py-8 px-4">
-        <h1 className="text-3xl font-bold text-white mb-8">My Profile</h1>
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold text-white">My Profile</h1>
+          <Link to="/">
+            <Button className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white">
+              <ArrowLeft size={16} />
+              Back to Sessions
+            </Button>
+          </Link>
+        </div>
         
         {/* User Profile Card */}
         <Card className="bg-gray-800 border-gray-700 shadow-lg mb-10">

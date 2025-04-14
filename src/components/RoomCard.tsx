@@ -58,7 +58,11 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
   const handleInviteConfirm = (invitedUserIds: string[]) => {
     setSelectedInvites(invitedUserIds);
     setSelectedBookingType('private');
-    setBookingConfirmOpen(true);
+    
+    // Delay showing the confirmation dialog to avoid event conflicts
+    setTimeout(() => {
+      setBookingConfirmOpen(true);
+    }, 150);
   };
 
   // Handle booking confirmations
@@ -77,12 +81,20 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
     } else if (selectedBookingType === 'open') {
       onBookOpen(id);
     }
-    setBookingConfirmOpen(false);
+    
+    // Delay closing to avoid event conflicts
+    setTimeout(() => {
+      setBookingConfirmOpen(false);
+    }, 100);
   };
 
   const confirmJoin = () => {
     onJoinOpen(id);
-    setJoinConfirmOpen(false);
+    
+    // Delay closing to avoid event conflicts
+    setTimeout(() => {
+      setJoinConfirmOpen(false);
+    }, 100);
   };
 
   // Calculate booking cost
@@ -138,7 +150,7 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
     // Small delay to prevent event conflicts
     setTimeout(() => {
       setInviteDialogOpen(false);
-    }, 0);
+    }, 100);
   };
 
   const handleBookingConfirmClose = (open: boolean) => {
@@ -146,7 +158,7 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
       // Small delay to prevent event conflicts
       setTimeout(() => {
         setBookingConfirmOpen(false);
-      }, 0);
+      }, 100);
     }
   };
 
@@ -155,7 +167,7 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
       // Small delay to prevent event conflicts
       setTimeout(() => {
         setJoinConfirmOpen(false);
-      }, 0);
+      }, 100);
     }
   };
 
