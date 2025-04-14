@@ -133,6 +133,32 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
     return null;
   };
 
+  // Handle modal close events
+  const handleInviteDialogClose = () => {
+    // Small delay to prevent event conflicts
+    setTimeout(() => {
+      setInviteDialogOpen(false);
+    }, 0);
+  };
+
+  const handleBookingConfirmClose = (open: boolean) => {
+    if (!open) {
+      // Small delay to prevent event conflicts
+      setTimeout(() => {
+        setBookingConfirmOpen(false);
+      }, 0);
+    }
+  };
+
+  const handleJoinConfirmClose = (open: boolean) => {
+    if (!open) {
+      // Small delay to prevent event conflicts
+      setTimeout(() => {
+        setJoinConfirmOpen(false);
+      }, 0);
+    }
+  };
+
   return (
     <>
       <Card className={`${cardStyles[status]} transition-all duration-200 border h-full overflow-hidden`}>
@@ -163,13 +189,13 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
 
       <InviteFriendsDialog
         isOpen={inviteDialogOpen}
-        onClose={() => setInviteDialogOpen(false)}
+        onClose={handleInviteDialogClose}
         onConfirm={handleInviteConfirm}
       />
 
       {/* Booking Confirmation Dialog */}
-      <AlertDialog open={bookingConfirmOpen} onOpenChange={setBookingConfirmOpen}>
-        <AlertDialogContent className="bg-gray-900 border border-gray-700">
+      <AlertDialog open={bookingConfirmOpen} onOpenChange={handleBookingConfirmClose}>
+        <AlertDialogContent className="bg-gray-900 border border-gray-700 z-50">
           <AlertDialogHeader>
             <AlertDialogTitle className="text-white">Confirm Booking</AlertDialogTitle>
             <AlertDialogDescription className="text-gray-300">
@@ -188,8 +214,8 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
       </AlertDialog>
 
       {/* Join Confirmation Dialog */}
-      <AlertDialog open={joinConfirmOpen} onOpenChange={setJoinConfirmOpen}>
-        <AlertDialogContent className="bg-gray-900 border border-gray-700">
+      <AlertDialog open={joinConfirmOpen} onOpenChange={handleJoinConfirmClose}>
+        <AlertDialogContent className="bg-gray-900 border border-gray-700 z-50">
           <AlertDialogHeader>
             <AlertDialogTitle className="text-white">Confirm Join</AlertDialogTitle>
             <AlertDialogDescription className="text-gray-300">

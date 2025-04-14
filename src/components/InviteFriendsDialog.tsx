@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { users, currentUser, User } from "@/utils/mockData";
+import { users, currentUser } from "@/utils/mockData";
 import UserAvatar from "./UserAvatar";
 
 interface InviteFriendsDialogProps {
@@ -29,7 +29,18 @@ const InviteFriendsDialog = ({ isOpen, onClose, onConfirm }: InviteFriendsDialog
   const handleConfirm = () => {
     onConfirm(selectedUsers);
     setSelectedUsers([]);
-    onClose();
+    // Using setTimeout to avoid race conditions with event handlers
+    setTimeout(() => {
+      onClose();
+    }, 0);
+  };
+
+  const handleClose = () => {
+    setSelectedUsers([]);
+    // Using setTimeout to avoid race conditions with event handlers
+    setTimeout(() => {
+      onClose();
+    }, 0);
   };
   
   const calculateTotalPoints = () => {
@@ -37,8 +48,8 @@ const InviteFriendsDialog = ({ isOpen, onClose, onConfirm }: InviteFriendsDialog
   };
   
   return (
-    <Dialog open={isOpen} onOpenChange={open => !open && onClose()}>
-      <DialogContent className="bg-gray-800 border-gray-700 text-white">
+    <Dialog open={isOpen} onOpenChange={(open) => !open && handleClose()}>
+      <DialogContent className="bg-gray-800 border-gray-700 text-white z-50">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold text-white">Invite Friends</DialogTitle>
           <DialogDescription className="text-gray-300">
@@ -77,7 +88,7 @@ const InviteFriendsDialog = ({ isOpen, onClose, onConfirm }: InviteFriendsDialog
         <DialogFooter>
           <Button 
             variant="outline" 
-            onClick={onClose}
+            onClick={handleClose}
             className="border-gray-600 text-gray-300 hover:bg-gray-700"
           >
             Cancel

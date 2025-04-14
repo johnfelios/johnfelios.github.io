@@ -27,7 +27,19 @@ const ProfilePage = () => {
   const confirmPurchase = () => {
     if (selectedPackage) {
       toast.success(`Successfully purchased ${selectedPackage.points} points!`);
-      setPurchaseDialogOpen(false);
+      // Small delay to prevent event conflicts
+      setTimeout(() => {
+        setPurchaseDialogOpen(false);
+      }, 0);
+    }
+  };
+
+  const handlePurchaseDialogClose = (open: boolean) => {
+    if (!open) {
+      // Small delay to prevent event conflicts
+      setTimeout(() => {
+        setPurchaseDialogOpen(false);
+      }, 0);
     }
   };
   
@@ -122,8 +134,8 @@ const ProfilePage = () => {
       </div>
       
       {/* Purchase Confirmation Dialog */}
-      <AlertDialog open={purchaseDialogOpen} onOpenChange={setPurchaseDialogOpen}>
-        <AlertDialogContent className="bg-gray-900 border border-gray-700">
+      <AlertDialog open={purchaseDialogOpen} onOpenChange={handlePurchaseDialogClose}>
+        <AlertDialogContent className="bg-gray-900 border border-gray-700 z-50">
           <AlertDialogHeader>
             <AlertDialogTitle className="text-white">Confirm Purchase</AlertDialogTitle>
             <AlertDialogDescription className="text-gray-300">
