@@ -1,5 +1,5 @@
 
-import { Dumbbell, Clock, Users, Barbell, Weight } from "lucide-react";
+import { Dumbbell, Clock, Users, Hammer, Weight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 const GymInfo = () => {
@@ -30,7 +30,7 @@ const GymInfo = () => {
         <Card className="bg-gray-800/50 border-gray-700">
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
-              <Barbell className="h-5 w-5 text-purple-400" />
+              <Dumbbell className="h-5 w-5 text-purple-400" />
               Cardio Zone
             </CardTitle>
           </CardHeader>
