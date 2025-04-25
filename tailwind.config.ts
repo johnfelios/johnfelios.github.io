@@ -25,47 +25,29 @@ export default {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: '#6D28D9',
+          DEFAULT: '#6D28D9',  // Deep Purple
           foreground: '#ffffff'
         },
         secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))'
-        },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))'
-        },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))'
+          DEFAULT: '#7E22CE',  // Vivid Purple
+          foreground: '#ffffff'
         },
         accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))'
+          DEFAULT: '#4338CA',  // Indigo
+          foreground: '#ffffff'
         },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))'
+        destructive: {
+          DEFAULT: '#be123c',  // Soft Red
+          foreground: '#ffffff'
         },
-        card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))'
-        },
-        sidebar: {
-          DEFAULT: 'hsl(var(--sidebar-background))',
-          foreground: 'hsl(var(--sidebar-foreground))',
-          primary: 'hsl(var(--sidebar-primary))',
-          'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-          accent: 'hsl(var(--sidebar-accent))',
-          'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-          border: 'hsl(var(--sidebar-border))',
-          ring: 'hsl(var(--sidebar-ring))'
+        muted: {
+          DEFAULT: '#4B5563',  // Cool Gray
+          foreground: '#9CA3AF'
         },
         gym: {
-          free: '#6D28D9',
-          open: '#9333EA',
-          unavailable: '#C8C8C9'
+          free: '#6D28D9',    // Deep Purple for Free Sessions
+          open: '#9333EA',    // Bright Purple for Open Sessions
+          unavailable: '#C8C8C9' // Light Gray for Unavailable
         }
       },
       borderRadius: {
