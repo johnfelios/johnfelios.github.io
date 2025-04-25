@@ -25,29 +25,29 @@ export default {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: '#6D28D9',  // Deep Purple
+          DEFAULT: '#0EA5E9',  // Ocean Blue
           foreground: '#ffffff'
         },
         secondary: {
-          DEFAULT: '#7E22CE',  // Vivid Purple
+          DEFAULT: '#0284C7',  // Deep Ocean
           foreground: '#ffffff'
         },
         accent: {
-          DEFAULT: '#4338CA',  // Indigo
+          DEFAULT: '#38BDF8',  // Sky Blue
           foreground: '#ffffff'
         },
         destructive: {
-          DEFAULT: '#be123c',  // Soft Red
+          DEFAULT: '#E11D48',  // Vibrant Red
           foreground: '#ffffff'
         },
         muted: {
-          DEFAULT: '#4B5563',  // Cool Gray
-          foreground: '#9CA3AF'
+          DEFAULT: '#64748B',  // Slate
+          foreground: '#94A3B8'
         },
         gym: {
-          free: '#6D28D9',    // Deep Purple for Free Sessions
-          open: '#9333EA',    // Bright Purple for Open Sessions
-          unavailable: '#C8C8C9' // Light Gray for Unavailable
+          free: '#0EA5E9',    // Ocean Blue for Free Sessions
+          open: '#38BDF8',    // Sky Blue for Open Sessions
+          unavailable: '#94A3B8' // Slate for Unavailable
         }
       },
       borderRadius: {

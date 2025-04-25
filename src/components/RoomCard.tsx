@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -23,10 +22,8 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
   const [selectedInvites, setSelectedInvites] = useState<string[]>([]);
   const [selectedBookingType, setSelectedBookingType] = useState<'private' | 'open' | null>(null);
 
-  // Clear selections when dialogs are closed
   useEffect(() => {
     if (!bookingConfirmOpen && !joinConfirmOpen && !inviteDialogOpen) {
-      // Reset states only when all dialogs are closed
       setTimeout(() => {
         if (!bookingConfirmOpen && !joinConfirmOpen && !inviteDialogOpen) {
           setSelectedBookingType(null);
@@ -35,21 +32,27 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
     }
   }, [bookingConfirmOpen, joinConfirmOpen, inviteDialogOpen]);
 
-  // Different card styles based on room status
   const cardStyles = {
-    free: "border-green-700 bg-gradient-to-b from-green-900 to-gray-900 hover:from-green-800 hover:to-gray-800",
-    open: "border-gray-700 bg-gradient-to-b from-yellow-950 to-gray-900 hover:from-yellow-900 hover:to-gray-800",
-    unavailable: "border-gray-800 bg-gradient-to-b from-gray-950 to-gray-900 opacity-70"
+    free: "border-sky-700/50 bg-sky-950/30 hover:bg-sky-900/40 backdrop-blur-xl",
+    open: "border-blue-700/50 bg-blue-950/30 hover:bg-blue-900/40 backdrop-blur-xl",
+    unavailable: "border-slate-700/50 bg-slate-950/30 backdrop-blur-xl opacity-70"
   };
 
-  // Render participants avatars for open rooms
+  const iconStyles = {
+    free: "text-sky-400",
+    open: "text-blue-400",
+    unavailable: "text-slate-400"
+  };
+
   const renderParticipants = () => {
     if ((status === "open" || status === "unavailable") && participants.length > 0) {
       return (
         <div className="mt-4">
           <div className="flex items-center gap-1 mb-3">
-            <Users size={20} className={status === "open" ? "text-yellow-300" : "text-gray-300"} />
-            <span className={`text-base font-medium ${status === "open" ? "text-yellow-100" : "text-gray-100"}`}>Participants</span>
+            <Users size={20} className={status === "open" ? "text-blue-300" : "text-slate-300"} />
+            <span className={`text-base font-medium ${status === "open" ? "text-blue-100" : "text-slate-100"}`}>
+              Participants
+            </span>
           </div>
           <div className="flex flex-wrap gap-2">
             {participants.map(user => (
@@ -62,7 +65,41 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
     return null;
   };
 
-  // Handle private booking with friends
+  const renderActions = () => {
+    if (status === "free") {
+      return (
+        <div className="flex flex-col gap-3 mt-4">
+          <Button 
+            className="bg-sky-600 hover:bg-sky-700 text-white text-base py-6 flex items-center justify-center gap-2"
+            onClick={handleOpenInviteDialog}
+          >
+            <UserPlus size={18} />
+            Book Private Session
+          </Button>
+          <Button 
+            variant="outline" 
+            className="border-sky-500/50 text-sky-300 hover:bg-sky-900/50 text-base py-6"
+            onClick={handleBookOpenConfirm}
+          >
+            Book Open (10pts)
+          </Button>
+        </div>
+      );
+    } else if (status === "open") {
+      return (
+        <div className="mt-4">
+          <Button 
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white text-base py-6"
+            onClick={handleJoinOpenConfirm}
+          >
+            Join Open (10pts)
+          </Button>
+        </div>
+      );
+    }
+    return null;
+  };
+
   const handleOpenInviteDialog = () => {
     setInviteDialogOpen(true);
   };
@@ -73,7 +110,6 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
     setBookingConfirmOpen(true);
   };
 
-  // Handle booking confirmations
   const handleBookOpenConfirm = () => {
     setSelectedBookingType('open');
     setBookingConfirmOpen(true);
@@ -97,7 +133,6 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
     setJoinConfirmOpen(false);
   };
 
-  // Calculate booking cost
   const getBookingCost = () => {
     if (selectedBookingType === 'private') {
       const basePoints = 40;
@@ -109,43 +144,6 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
     return 0;
   };
 
-  // Render action buttons based on room status
-  const renderActions = () => {
-    if (status === "free") {
-      return (
-        <div className="flex flex-col gap-3 mt-4">
-          <Button 
-            className="bg-gray-800 hover:bg-gray-700 text-white text-base py-6 flex items-center justify-center gap-2"
-            onClick={handleOpenInviteDialog}
-          >
-            <UserPlus size={18} />
-            Book Private Session
-          </Button>
-          <Button 
-            variant="outline" 
-            className="border-gray-500 text-gray-300 hover:bg-gray-800 text-base py-6"
-            onClick={handleBookOpenConfirm}
-          >
-            Book Open (10pts)
-          </Button>
-        </div>
-      );
-    } else if (status === "open") {
-      return (
-        <div className="mt-4">
-          <Button 
-            className="w-full bg-yellow-800 hover:bg-yellow-700 text-white text-base py-6"
-            onClick={handleJoinOpenConfirm}
-          >
-            Join Open (10pts)
-          </Button>
-        </div>
-      );
-    }
-    return null;
-  };
-
-  // Handle modal close events
   const handleInviteDialogClose = () => {
     setInviteDialogOpen(false);
   };
@@ -164,20 +162,19 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
 
   return (
     <>
-      <Card className={`${cardStyles[status]} transition-all duration-200 border h-full overflow-hidden`}>
+      <Card className={`${cardStyles[status]} transition-all duration-300 border shadow-lg h-full overflow-hidden`}>
         <CardContent className="p-5">
-          <div className="flex items-center gap-2 mb-3">
-            <Clock size={20} className="text-gray-400" />
+          <div className="flex items-center gap-2 mb-4">
+            <Clock size={20} className={iconStyles[status]} />
             <span className="text-xl font-medium text-white">{timeSlot}</span>
           </div>
           
-          {/* Status indicator */}
           <div className="flex items-center gap-2 mb-2">
-            <Dumbbell size={20} className={status === "free" ? "text-green-400" : status === "open" ? "text-yellow-400" : "text-gray-500"} />
+            <Dumbbell size={20} className={iconStyles[status]} />
             <span className={`text-lg font-medium ${
-              status === "free" ? "text-green-300" : 
-              status === "open" ? "text-yellow-300" : 
-              "text-gray-400"
+              status === "free" ? "text-sky-300" : 
+              status === "open" ? "text-blue-300" : 
+              "text-slate-400"
             }`}>
               {status === "free" && "Available"}
               {status === "open" && "Open Session"}
@@ -196,7 +193,6 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
         onConfirm={handleInviteConfirm}
       />
 
-      {/* Booking Confirmation Dialog */}
       <AlertDialog open={bookingConfirmOpen} onOpenChange={handleBookingConfirmClose}>
         <AlertDialogContent className="bg-gray-900 border border-gray-700 z-50">
           <AlertDialogHeader>
@@ -216,7 +212,6 @@ const RoomCard = ({ booking, onBookPrivate, onBookOpen, onJoinOpen }: RoomCardPr
         </AlertDialogContent>
       </AlertDialog>
 
-      {/* Join Confirmation Dialog */}
       <AlertDialog open={joinConfirmOpen} onOpenChange={handleJoinConfirmClose}>
         <AlertDialogContent className="bg-gray-900 border border-gray-700 z-50">
           <AlertDialogHeader>
