@@ -5,25 +5,25 @@
 
 @layer base {
   :root {
-    --background: 217 24% 12%;
-    --foreground: 210 40% 98%;
-    --card: 217 24% 12%;
-    --card-foreground: 210 40% 98%;
-    --popover: 217 24% 12%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 199 89% 48%;
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 265 89% 50%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 201 97% 39%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217 24% 22%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 199 84% 55%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 346 87% 50%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217 24% 22%;
-    --input: 217 24% 22%;
-    --ring: 199 89% 48%;
+    --secondary: 265 70% 40%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 265 89% 50%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 350 89% 40%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 265 89% 50%;
     --radius: 0.75rem;
   }
 }
@@ -34,11 +34,10 @@
   }
 
   body {
-    @apply bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0F172A] text-slate-100;
+    @apply bg-gradient-to-b from-[#1A1F2C] via-[#2A2F3C] to-[#1A1F2C] text-gray-100;
   }
   
   html {
     @apply scroll-smooth;
   }
 }
-
