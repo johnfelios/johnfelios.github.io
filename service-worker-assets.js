@@ -1,5 +1,5 @@
 self.assetsManifest = {
-  "version": "QGh2LS38",
+  "version": "NnANOjCI",
   "assets": [
     {
       "hash": "sha256-ZtW6vokQgove9AFz0EAwasR/MNW06BHZM4FjiieBwLI=",
@@ -282,7 +282,7 @@ self.assetsManifest = {
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-YpALdHhd9Wb7137gsdpTGfu+cM3izkab+51co7GkEwc=",
+      "hash": "sha256-QEeN65PtCIwywsK0o1Jpqtrenc5GDYCu8ysUEIkN3AA=",
       "url": "index.html"
     },
     {
